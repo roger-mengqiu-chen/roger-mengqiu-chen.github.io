@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mengqiu.net","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="When passing a function to another function as a parameter, the passed function is called callback function.  A Promise is a proxy for a value not necessarily known when the promise is created. It all">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Callback vs Promise vs Async">
+<meta property="og:url" content="https://mengqiu.net/2022/01/25/Callback-vs-Promise-vs-Async/">
+<meta property="og:site_name" content="Mengqiu Chen">
+<meta property="og:description" content="When passing a function to another function as a parameter, the passed function is called callback function.  A Promise is a proxy for a value not necessarily known when the promise is created. It all">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://mengqiu.net/images/callback-promise-async1.png">
+<meta property="article:published_time" content="2022-01-25T19:28:34.000Z">
+<meta property="article:modified_time" content="2022-01-25T19:42:42.720Z">
+<meta property="article:author" content="Roger Chen">
+<meta property="article:tag" content="Syntax">
+<meta property="article:tag" content="Async">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mengqiu.net/images/callback-promise-async1.png">
+
+
+<link rel="canonical" href="https://mengqiu.net/2022/01/25/Callback-vs-Promise-vs-Async/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://mengqiu.net/2022/01/25/Callback-vs-Promise-vs-Async/","path":"2022/01/25/Callback-vs-Promise-vs-Async/","title":"Callback vs Promise vs Async"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Callback vs Promise vs Async | Mengqiu Chen</title>
+  
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WS51X455SM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WS51X455SM');
+</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Mengqiu Chen" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mengqiu Chen</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Blog of a human developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-project"><a href="/categories/Project/" rel="section"><i class="fas fa-tools fa-fw"></i>Project</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Callback-example"><span class="nav-number">1.</span> <span class="nav-text">Callback example:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Promise-example"><span class="nav-number">2.</span> <span class="nav-text">Promise example:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Async-example"><span class="nav-number">3.</span> <span class="nav-text">Async example:</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Roger Chen"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Roger Chen</p>
+  <div class="site-description" itemprop="description">Learning is not enough, you must apply</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/roger-mengqiu-chen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;roger-mengqiu-chen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/mengqiu-roger-chen-30833a96/" title="LinkedIn → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;mengqiu-roger-chen-30833a96&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin-in fa-fw"></i>LinkedIn</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://mengqiu.net/2022/01/25/Callback-vs-Promise-vs-Async/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Roger Chen">
+      <meta itemprop="description" content="Learning is not enough, you must apply">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mengqiu Chen">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Callback vs Promise vs Async
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-01-25 12:28:34 / Modified: 12:42:42" itemprop="dateCreated datePublished" datetime="2022-01-25T12:28:34-07:00">2022-01-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>When passing a function to another function as a parameter, the passed function is called callback function.</p>
+<blockquote>
+<p>A <strong><code>Promise</code></strong> is a proxy for a value not necessarily known when the promise is created. It allows you to associate handlers with an asynchronous action’s eventual success value or failure reason. This lets asynchronous methods return values like synchronous methods: instead of immediately returning the final value, the asynchronous method returns a <em>promise</em> to supply the value at some point in the future.</p>
+</blockquote>
+<span id="more"></span>
+
+<p><img src="/images/callback-promise-async1.png" alt="How promise works"></p>
+<p>An async function is a function declared with the <code>async</code> keyword, and the <code>await</code> keyword is permitted within it. The <code>async</code> and <code>await</code> keywords enable asynchronous, promise-based behaviour to be written in a cleaner style, avoiding the need to explicitly configure promise chains.</p>
+<p>To explain these three concepts, we can use example provided in </p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=PoRJizFvM7s">https://www.youtube.com/watch?v=PoRJizFvM7s</a></p>
+<p>If we have posts:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> posts = [</span><br><span class="line">    &#123;<span class="attr">title</span>: <span class="string">&#x27;post 1&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;this is post one&#x27;</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">title</span>: <span class="string">&#x27;post 2&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;this is post two&#x27;</span>&#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>And <code>getPosts</code> function:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getPosts</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> output = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        posts.forEach(<span class="function">(<span class="params">post</span>) =&gt;</span> &#123;</span><br><span class="line">            output += <span class="string">`&lt;li&gt;<span class="subst">$&#123;post.title&#125;</span>&lt;/li&gt;`</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="built_in">document</span>.body.innerHTML = output;</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Callback-example"><a href="#Callback-example" class="headerlink" title="Callback example:"></a>Callback example:</h1><p>We can have a function to create post:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPost</span>(<span class="params">post, callback</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        posts.push(post);</span><br><span class="line">        callback();</span><br><span class="line">    &#125;, <span class="number">2000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>callback()</code> has to be inside of <code>setTimeout()</code> , otherwise, <code>callback()</code> will run without waiting <code>post.push()</code>. This is the feature of async programming. </p>
+<p>Then we can trigger <code>createPost()</code></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">createPost(&#123;<span class="attr">title</span>: <span class="string">&#x27;post 3&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;this is post three&#x27;</span>&#125;, getPosts);</span><br></pre></td></tr></table></figure>
+
+<p>You will see “post 1” and “post 2” first and then 2 seconds later, “post 3” shows up. </p>
+<h1 id="Promise-example"><a href="#Promise-example" class="headerlink" title="Promise example:"></a>Promise example:</h1><p>We can modify <code>createPost</code> to make it return promise:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPost</span>(<span class="params">post</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123; <span class="comment">// has to have 2 parameters to indicate callback functions to handle resolve and reject</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            posts.push(post);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">const</span> error = <span class="literal">false</span>; </span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!error) &#123;</span><br><span class="line">                resolve();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                reject(<span class="string">&#x27;Error !&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="number">2000</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Then call the function:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">createPost(&#123; <span class="attr">title</span>: <span class="string">&#x27;post 3&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;this is post three&#x27;</span>&#125;)</span><br><span class="line">    .then(getPosts)</span><br><span class="line">    .catch(<span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.log(err));</span><br></pre></td></tr></table></figure>
+
+<p>This has the same effect as using callback function mentioned above. </p>
+<p>If we change <code>error</code> to <code>true</code> in <code>createPost</code> , the <code>catch</code> will handle the error, which is <code>console.log</code>.</p>
+<p>In addition, we can handle multiple promises:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise1 = <span class="built_in">Promise</span>.resolve(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> promise2 = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> promise3 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> </span><br><span class="line">    <span class="built_in">setTimeout</span>(resolve, <span class="number">2000</span>, <span class="string">&#x27;goodbye&#x27;</span>)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">const</span> promise4 = fetch(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.all([promise1, promise2, promise3])</span><br><span class="line">	.then(<span class="function">(<span class="params">values</span>) =&gt;</span> <span class="built_in">console</span>.log(values)); </span><br></pre></td></tr></table></figure>
+
+<p>Result:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;hello&#x27;</span>, <span class="number">10</span>, <span class="string">&#x27;goodbye&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h1 id="Async-example"><a href="#Async-example" class="headerlink" title="Async example:"></a>Async example:</h1><p>Async function is more elegant. So we don’t need <code>.then()</code> of promise. <code>createPost</code> function is the same as the previous one. Then, we need the keyword <code>async</code> before the function that triggers <code>createPost</code> and <code>getPosts</code>. And put <code>await</code> before the function <code>createPost</code> which needs to be waited until completed. </p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">await</span> createPost(&#123; <span class="attr">title</span>: <span class="string">&#x27;post 3&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;this is post three&#x27;</span>&#125;);</span><br><span class="line">    getPosts();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">init();</span><br></pre></td></tr></table></figure>
+
+<p><code>init</code> will start <code>createPost</code>.  Once <code>createPost</code> is completed, it will trigger <code>getPosts</code></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Syntax/" rel="tag"># Syntax</a>
+              <a href="/tags/Async/" rel="tag"># Async</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/25/Desctructuring-object/" rel="prev" title="Desctructuring object">
+                  <i class="fa fa-chevron-left"></i> Desctructuring object
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/25/Creating-a-server-with-NodeJS/" rel="next" title="Creating a server with NodeJS">
+                  Creating a server with NodeJS <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fab fa-canadian-maple-leaf"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Roger Chen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

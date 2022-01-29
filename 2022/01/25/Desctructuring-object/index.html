@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.0.0">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -19,37 +18,47 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"mengqiu.me","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="JS functions are parameterized. They have a list of identifiers, known as parameters, that work as local variables for the body of the function.  In addition to the arguments, each invocation has anot">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mengqiu.net","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="In a destructuring assignment, the value on the righthand side of the equals sign is an array or object (a “structured” value), and the lefthand side specifies one or more variable names using a synta">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript function and arrow function">
-<meta property="og:url" content="https://mengqiu.me/2022/01/24/JavaScript-function-and-arrow-function/index.html">
+<meta property="og:title" content="Desctructuring object">
+<meta property="og:url" content="https://mengqiu.net/2022/01/25/Desctructuring-object/">
 <meta property="og:site_name" content="Mengqiu Chen">
-<meta property="og:description" content="JS functions are parameterized. They have a list of identifiers, known as parameters, that work as local variables for the body of the function.  In addition to the arguments, each invocation has anot">
+<meta property="og:description" content="In a destructuring assignment, the value on the righthand side of the equals sign is an array or object (a “structured” value), and the lefthand side specifies one or more variable names using a synta">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-01-24T07:07:25.000Z">
-<meta property="article:modified_time" content="2022-01-24T07:11:12.993Z">
+<meta property="article:published_time" content="2022-01-25T16:53:59.000Z">
+<meta property="article:modified_time" content="2022-01-25T16:55:10.777Z">
 <meta property="article:author" content="Roger Chen">
 <meta property="article:tag" content="Syntax">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://mengqiu.me/2022/01/24/JavaScript-function-and-arrow-function/">
+<link rel="canonical" href="https://mengqiu.net/2022/01/25/Desctructuring-object/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://mengqiu.me/2022/01/24/JavaScript-function-and-arrow-function/","path":"2022/01/24/JavaScript-function-and-arrow-function/","title":"JavaScript function and arrow function"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://mengqiu.net/2022/01/25/Desctructuring-object/","path":"2022/01/25/Desctructuring-object/","title":"Desctructuring object"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>JavaScript function and arrow function | Mengqiu Chen</title>
+<title>Desctructuring object | Mengqiu Chen</title>
   
 
 
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WS51X455SM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WS51X455SM');
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
+<link rel="alternate" href="/atom.xml" title="Mengqiu Chen" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -91,6 +100,7 @@
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-project"><a href="/categories/Project/" rel="section"><i class="fas fa-tools fa-fw"></i>Project</a></li>
   </ul>
 </nav>
 
@@ -135,18 +145,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -193,7 +203,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://mengqiu.me/2022/01/24/JavaScript-function-and-arrow-function/">
+    <link itemprop="mainEntityOfPage" href="https://mengqiu.net/2022/01/25/Desctructuring-object/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -206,7 +216,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JavaScript function and arrow function
+          Desctructuring object
         </h1>
 
         <div class="post-meta-container">
@@ -218,7 +228,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-01-24 00:07:25 / Modified: 00:11:12" itemprop="dateCreated datePublished" datetime="2022-01-24T00:07:25-07:00">2022-01-24</time>
+      <time title="Created: 2022-01-25 09:53:59 / Modified: 09:55:10" itemprop="dateCreated datePublished" datetime="2022-01-25T09:53:59-07:00">2022-01-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -240,17 +250,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>JS functions are parameterized. They have a list of identifiers, known as parameters, that work as local variables for the body of the function. </p>
-<p>In addition to the arguments, each invocation has another value — the invocation context: the value of <code>this</code> keyword. </p>
-<p>It’s a good idea to use <code>const</code> for function name. </p>
-<p>Function defined with expressions can’t be invoked before they are defined. </p>
-<p>Example:</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(hello1());</span><br><span class="line"><span class="built_in">console</span>.log(hello2());</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello1</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// hello2 will throw exception as it&#x27;s called before initialization</span></span><br><span class="line"><span class="keyword">const</span> hello2 = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        <p>In a destructuring assignment, the value on the righthand side of the equals sign is an array or object (a “structured” value), and the lefthand side specifies one or more variable names using a syntax that mimics array and object literal syntax. When a destructuring assignment occurs, one or more values are extracted (“destructured”) from the value on the right and stored into the variables named on the left.</p>
+<span id="more"></span>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> [x,y] = [<span class="number">1</span>,<span class="number">2</span>];</span><br><span class="line"><span class="built_in">console</span>.log(x,y); <span class="comment">// print 1 2</span></span><br><span class="line">[x,y] = [y,x]</span><br><span class="line"><span class="built_in">console</span>.log(x,y); <span class="comment">// print 2 1</span></span><br><span class="line">[x,y] = [x+<span class="number">1</span>, y+<span class="number">1</span>];</span><br><span class="line"><span class="built_in">console</span>.log(x,y); <span class="comment">// print 3 2</span></span><br></pre></td></tr></table></figure>
 
-<p>In short, with arrow functions there are no binding of <code>this</code>.</p>
-<p>In regular functions the <code>this</code> keyword represented the object that called the function, which could be the window, the document, a button or whatever.</p>
-<p>With arrow functions the <code>this</code> keyword <em>always</em> represents the object that defined the arrow function.</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name = <span class="string">&quot;global&quot;</span>; <span class="comment">// In nodejs, there&#x27;s no global variable called window</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;jason&quot;</span>,</span><br><span class="line"></span><br><span class="line">    <span class="attr">shout</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;my name is &quot;</span>, <span class="built_in">this</span>.name);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">shout2</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;my name is &quot;</span>, <span class="built_in">this</span>.name);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// Shorter syntax</span></span><br><span class="line">    <span class="function"><span class="title">shout3</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;my name is &quot;</span>, <span class="built_in">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">person.shout();  <span class="comment">// &quot;jason&quot;</span></span><br><span class="line">person.shout2(); <span class="comment">// &quot;global&quot;</span></span><br><span class="line">person.shout3(); <span class="comment">// &quot;jason&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> o = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.entries(o)); <span class="comment">// print [[&#x27;x&#x27;, 1], [&#x27;y&#x27;, 2]]</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> [name, value] <span class="keyword">of</span> <span class="built_in">Object</span>.entries(o)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name, value);</span><br><span class="line">&#125; <span class="comment">// print x 1 and y 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123;x, y&#125; = o; <span class="comment">// extract from object o</span></span><br><span class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(y); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Destructuring function parameter</strong></p>
+<p>To extract attribute from object in function parameter:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;max&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">29</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> getName = <span class="function"><span class="keyword">function</span> (<span class="params">&#123; name &#125;</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name);</span><br><span class="line">&#125;</span><br><span class="line">getName(person); <span class="comment">// print &#x27;max&#x27;</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -267,11 +275,14 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/01/23/Hello/" rel="prev" title="Hello">
-                  <i class="fa fa-chevron-left"></i> Hello
+                <a href="/2022/01/24/Spread-and-rest-operator/" rel="prev" title="Spread and rest operator">
+                  <i class="fa fa-chevron-left"></i> Spread and rest operator
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2022/01/25/Callback-vs-Promise-vs-Async/" rel="next" title="Callback vs Promise vs Async">
+                  Callback vs Promise vs Async <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>

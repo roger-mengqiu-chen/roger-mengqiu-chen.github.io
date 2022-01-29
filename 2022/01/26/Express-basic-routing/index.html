@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mengqiu.net","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. In express, everything is middleware.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Express basic routing">
+<meta property="og:url" content="https://mengqiu.net/2022/01/26/Express-basic-routing/">
+<meta property="og:site_name" content="Mengqiu Chen">
+<meta property="og:description" content="Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. In express, everything is middleware.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-27T03:15:27.000Z">
+<meta property="article:modified_time" content="2022-01-28T04:16:16.915Z">
+<meta property="article:author" content="Roger Chen">
+<meta property="article:tag" content="NodeJS">
+<meta property="article:tag" content="Server">
+<meta property="article:tag" content="Routing">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mengqiu.net/2022/01/26/Express-basic-routing/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://mengqiu.net/2022/01/26/Express-basic-routing/","path":"2022/01/26/Express-basic-routing/","title":"Express basic routing"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Express basic routing | Mengqiu Chen</title>
+  
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WS51X455SM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WS51X455SM');
+</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Mengqiu Chen" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mengqiu Chen</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Blog of a human developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-project"><a href="/categories/Project/" rel="section"><i class="fas fa-tools fa-fw"></i>Project</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Install-express"><span class="nav-number">1.</span> <span class="nav-text">Install express:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic-request-response-handling"><span class="nav-number">2.</span> <span class="nav-text">Basic request&#x2F;response handling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Express-routing"><span class="nav-number">3.</span> <span class="nav-text">Express routing</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Difference-between-app-use-and-router-get"><span class="nav-number">3.1.</span> <span class="nav-text">Difference between app.use() and router.get()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Filtering-paths"><span class="nav-number">4.</span> <span class="nav-text">Filtering paths</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Roger Chen"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Roger Chen</p>
+  <div class="site-description" itemprop="description">Learning is not enough, you must apply</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/roger-mengqiu-chen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;roger-mengqiu-chen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/mengqiu-roger-chen-30833a96/" title="LinkedIn → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;mengqiu-roger-chen-30833a96&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin-in fa-fw"></i>LinkedIn</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://mengqiu.net/2022/01/26/Express-basic-routing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Roger Chen">
+      <meta itemprop="description" content="Learning is not enough, you must apply">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mengqiu Chen">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Express basic routing
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-01-26 20:15:27" itemprop="dateCreated datePublished" datetime="2022-01-26T20:15:27-07:00">2022-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-01-27 21:16:16" itemprop="dateModified" datetime="2022-01-27T21:16:16-07:00">2022-01-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. In express, everything is middleware.</p>
+<span id="more"></span>
+
+<p><a target="_blank" rel="noopener" href="https://expressjs.com/en/api.html#express">Express 4.x API</a></p>
+<h1 id="Install-express"><a href="#Install-express" class="headerlink" title="Install express:"></a>Install express:</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save express</span><br></pre></td></tr></table></figure>
+
+<h1 id="Basic-request-response-handling"><a href="#Basic-request-response-handling" class="headerlink" title="Basic request/response handling"></a>Basic request/response handling</h1><p>Let’s create a simple routing here: </p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>); <span class="comment">// check the source code, it exports a function</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123; <span class="comment">// use add a middleware to the stack</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;in the middleware&#x27;</span>);</span><br><span class="line">  next(); <span class="comment">// allows the request to continue to the next middleware</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;in another middleware&#x27;</span>);</span><br><span class="line">  res.send(<span class="string">&#x27;&lt;h1&gt;hello from express&lt;/h1&gt;&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p>After running the code above, got to “localhost:3000”, we will get “hello from express” in the browser and two messages in console. </p>
+<p>We can add some specific path for handling. For example:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(<span class="string">&#x27;/path&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;...&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>The default path is <code>/</code>, if we don’t specify any path here</p>
+<p>NodeJS parse from top to bottom, if one function doesn’t have <code>next()</code> in its body, it will block the code and request won’t go to the next function. For example:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">app.use (<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;always run&#x27;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.use(<span class="string">&#x27;/add-product&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;in another middleware&#x27;</span>);</span><br><span class="line">  res.send(<span class="string">&#x27;&lt;h1&gt;Add product&lt;/h1&gt;&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>When we send request <code>‘/add-product’</code>, The first <code>app.use()</code> has <code>next()</code>, so the second one will be reached and send response back. If the first one doesn’t have <code>next()</code> , the second one won’t be executed, the page will keep loading because there’s no response sent back. </p>
+<p>To parse request body, we need package called body-parser</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save body-parser</span><br></pre></td></tr></table></figure>
+
+<p>And use bodyParser before all the middlewares</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(bodyParser.urlencoded(&#123;<span class="attr">extended</span>: <span class="literal">false</span>&#125;));</span><br></pre></td></tr></table></figure>
+
+<p><code>app.use</code> will handle all types of requests. To handle POST request particularly, just change <code>use</code> to <code>post</code>. </p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="string">&#x27;/path&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;...&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>To handle other http requests, we just need to change it to <code>put</code>, <code>get</code>, etc.  </p>
+<h1 id="Express-routing"><a href="#Express-routing" class="headerlink" title="Express routing"></a>Express routing</h1><p>We can construct some modules to improve reusability:</p>
+<p>For example, we can make an admin module to handle get request <code>/add-product</code> to get form data for adding product and post request <code>/product</code> to post form data:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> router = express.Router();</span><br><span class="line"><span class="comment">// below will get a form </span></span><br><span class="line">router.get(<span class="string">&#x27;/add-product&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  res.send(<span class="string">&#x27;&lt;form action=&quot;/product&quot; method=&quot;POST&quot;&gt;&lt;input type=&quot;text&quot; name=&quot;title&quot;&gt;&lt;button type=&quot;submit&quot;&gt;Add product&lt;/button&gt;&lt;/form&gt;&#x27;</span>);</span><br><span class="line">&#125;); </span><br><span class="line"><span class="comment">// below will post the form data</span></span><br><span class="line">router.post(<span class="string">&#x27;/product&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.body);</span><br><span class="line">  res.redirect(<span class="string">&#x27;/&#x27;</span>); <span class="comment">// once print out the body of request, redirect to /</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+
+<p>Then we can use this module in our entry point (<code>app.js</code> for this example):</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;body-parser&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> adminRoutes = <span class="built_in">require</span>(<span class="string">&#x27;./admin&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line">app.use(bodyParser.urlencoded(&#123;<span class="attr">extended</span>: <span class="literal">false</span>&#125;));</span><br><span class="line">app.use(adminRoutes);</span><br><span class="line">app.listen(<span class="number">3000</span>); <span class="comment">// this will create server and listen on 3000</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Difference-between-app-use-and-router-get"><a href="#Difference-between-app-use-and-router-get" class="headerlink" title="Difference between app.use() and router.get()"></a>Difference between <code>app.use()</code> and <code>router.get()</code></h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"><span class="keyword">const</span> router = express.Router();</span><br><span class="line"></span><br><span class="line">app.use(<span class="string">&#x27;/first&#x27;</span>, router); <span class="comment">// mount the router as middleware at path /first</span></span><br><span class="line">router.get(<span class="string">&#x27;/sud&#x27;</span>, smaller);</span><br><span class="line">router.get(<span class="string">&#x27;/user&#x27;</span>, bigger);</span><br></pre></td></tr></table></figure>
+
+<p>When sending <code>/first/sud</code> smaller function will be called.</p>
+<p>If you open <code>/first/user</code>, then the <code>bigger</code> function will get called.</p>
+<p><code>app</code> mounts middleware first, <code>router</code> set subpath accordingly</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.use(<span class="string">&#x27;/first&#x27;</span>, fun);</span><br><span class="line">app.get(<span class="string">&#x27;/sud&#x27;</span>, bigger);</span><br><span class="line">app.get(<span class="string">&#x27;/user&#x27;</span>, smaller);</span><br></pre></td></tr></table></figure>
+
+<p>In the code above, functions will be called at <code>/first</code>, <code>/sud</code>, <code>/user</code>. </p>
+<p>If we call <code>/first/sud</code>, there’s no response.</p>
+<h1 id="Filtering-paths"><a href="#Filtering-paths" class="headerlink" title="Filtering paths"></a>Filtering paths</h1><p>If request type is different, it can have the same path. For example</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">&#x27;/add-product&#x27;</span>...)</span><br><span class="line">router.post(<span class="string">&#x27;/add-product&#x27;</span>...)</span><br></pre></td></tr></table></figure>
+
+<p><code>app.use</code>  can have filtering path</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(<span class="string">&#x27;/admin&#x27;</span>, adminRouters) </span><br></pre></td></tr></table></figure>
+
+<p>If we have <code>route.get(’/add-product’ ...)</code> within adminRouters, we need send request <code>‘/admin/add-product’</code> to get result.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/NodeJS/" rel="tag"># NodeJS</a>
+              <a href="/tags/Server/" rel="tag"># Server</a>
+              <a href="/tags/Routing/" rel="tag"># Routing</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/25/Creating-a-server-with-NodeJS/" rel="prev" title="Creating a server with NodeJS">
+                  <i class="fa fa-chevron-left"></i> Creating a server with NodeJS
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/28/Project-IPv4-auto-subnetting-API/" rel="next" title="Project: IPv4 auto subnetting API">
+                  Project: IPv4 auto subnetting API <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fab fa-canadian-maple-leaf"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Roger Chen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
