@@ -55,26 +55,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Desctructuring object</title>
-    <url>/2022/01/25/Desctructuring-object/</url>
-    <content><![CDATA[<p>In a destructuring assignment, the value on the righthand side of the equals sign is an array or object (a “structured” value), and the lefthand side specifies one or more variable names using a syntax that mimics array and object literal syntax. When a destructuring assignment occurs, one or more values are extracted (“destructured”) from the value on the right and stored into the variables named on the left.</p>
-<span id="more"></span>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [x,y] = [<span class="number">1</span>,<span class="number">2</span>];</span><br><span class="line"><span class="built_in">console</span>.log(x,y); <span class="comment">// print 1 2</span></span><br><span class="line">[x,y] = [y,x]</span><br><span class="line"><span class="built_in">console</span>.log(x,y); <span class="comment">// print 2 1</span></span><br><span class="line">[x,y] = [x+<span class="number">1</span>, y+<span class="number">1</span>];</span><br><span class="line"><span class="built_in">console</span>.log(x,y); <span class="comment">// print 3 2</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> o = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.entries(o)); <span class="comment">// print [[&#x27;x&#x27;, 1], [&#x27;y&#x27;, 2]]</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> [name, value] <span class="keyword">of</span> <span class="built_in">Object</span>.entries(o)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name, value);</span><br><span class="line">&#125; <span class="comment">// print x 1 and y 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123;x, y&#125; = o; <span class="comment">// extract from object o</span></span><br><span class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(y); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>Destructuring function parameter</strong></p>
-<p>To extract attribute from object in function parameter:</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;max&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">29</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> getName = <span class="function"><span class="keyword">function</span> (<span class="params">&#123; name &#125;</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name);</span><br><span class="line">&#125;</span><br><span class="line">getName(person); <span class="comment">// print &#x27;max&#x27;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>Syntax</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Creating a server with NodeJS</title>
     <url>/2022/01/25/Creating-a-server-with-NodeJS/</url>
     <content><![CDATA[<p>To create a server, we need http module. The application also should keep running with listening to a port. </p>
@@ -174,6 +154,26 @@
       </tags>
   </entry>
   <entry>
+    <title>Desctructuring object</title>
+    <url>/2022/01/25/Desctructuring-object/</url>
+    <content><![CDATA[<p>In a destructuring assignment, the value on the righthand side of the equals sign is an array or object (a “structured” value), and the lefthand side specifies one or more variable names using a syntax that mimics array and object literal syntax. When a destructuring assignment occurs, one or more values are extracted (“destructured”) from the value on the right and stored into the variables named on the left.</p>
+<span id="more"></span>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [x,y] = [<span class="number">1</span>,<span class="number">2</span>];</span><br><span class="line"><span class="built_in">console</span>.log(x,y); <span class="comment">// print 1 2</span></span><br><span class="line">[x,y] = [y,x]</span><br><span class="line"><span class="built_in">console</span>.log(x,y); <span class="comment">// print 2 1</span></span><br><span class="line">[x,y] = [x+<span class="number">1</span>, y+<span class="number">1</span>];</span><br><span class="line"><span class="built_in">console</span>.log(x,y); <span class="comment">// print 3 2</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> o = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.entries(o)); <span class="comment">// print [[&#x27;x&#x27;, 1], [&#x27;y&#x27;, 2]]</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> [name, value] <span class="keyword">of</span> <span class="built_in">Object</span>.entries(o)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name, value);</span><br><span class="line">&#125; <span class="comment">// print x 1 and y 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123;x, y&#125; = o; <span class="comment">// extract from object o</span></span><br><span class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(y); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Destructuring function parameter</strong></p>
+<p>To extract attribute from object in function parameter:</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;max&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">29</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> getName = <span class="function"><span class="keyword">function</span> (<span class="params">&#123; name &#125;</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name);</span><br><span class="line">&#125;</span><br><span class="line">getName(person); <span class="comment">// print &#x27;max&#x27;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>Syntax</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript function</title>
     <url>/2022/01/24/JavaScript-function/</url>
     <content><![CDATA[<p>JS functions are parameterized. They have a list of identifiers, known as parameters, that work as local variables for the body of the function. </p>
@@ -207,7 +207,7 @@
 <h1 id="Using-this-API"><a href="#Using-this-API" class="headerlink" title="Using this API"></a>Using this API</h1><p>The API will handle IPv4 subnetting automatically. It also handles the invalid user input. If the amount of required subnet address is too large, API will return <code>&#39;Not enough address !&#39;</code>.</p>
 <p>To send request to this API, you need follow the format as below:</p>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;hostIp&quot;</span>:<span class="string">&quot;210.100.56.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;mask&quot;</span>:<span class="string">&quot;255.255.255.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;subnets&quot;</span>:&#123;</span><br><span class="line">        <span class="attr">&quot;net1&quot;</span>:<span class="number">2133</span>,</span><br><span class="line">        <span class="attr">&quot;net2&quot;</span>:<span class="number">4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Within “subnets”, you need to mention the name of your subnet and the required amount of hosts within this subnet.<br>If the parent network has enough address, it will reponse with JSON with following format:</p>
+<p>Within “subnets”, you need to mention the name of your subnet and the required amount of hosts within this subnet.<br>If the parent network has enough address, it will repond with JSON with following format:</p>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;net2&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;ipAddress&quot;</span>: [</span><br><span class="line">            <span class="number">210</span>,</span><br><span class="line">            <span class="number">100</span>,</span><br><span class="line">            <span class="number">56</span>,</span><br><span class="line">            <span class="number">32</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;numberOfHosts&quot;</span>: <span class="number">4</span>,</span><br><span class="line">        <span class="attr">&quot;prefix&quot;</span>: <span class="number">29</span>,</span><br><span class="line">        <span class="attr">&quot;mask&quot;</span>: [</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">248</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;allocatedAddresses&quot;</span>: <span class="number">8</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;net1&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;ipAddress&quot;</span>: [</span><br><span class="line">            <span class="number">210</span>,</span><br><span class="line">            <span class="number">100</span>,</span><br><span class="line">            <span class="number">56</span>,</span><br><span class="line">            <span class="number">0</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;numberOfHosts&quot;</span>: <span class="number">21</span>,</span><br><span class="line">        <span class="attr">&quot;prefix&quot;</span>: <span class="number">27</span>,</span><br><span class="line">        <span class="attr">&quot;mask&quot;</span>: [</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">224</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;allocatedAddresses&quot;</span>: <span class="number">32</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
 <h1 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h1><h2 id="IPv4-network"><a href="#IPv4-network" class="headerlink" title="IPv4 network"></a><strong>IPv4 network</strong></h2><p>IPv4 is 32 bit long IP address. We can divide the address into 4 sections, each of which is 8 bit long. In human-readable format, we separate these sections with “.” (e.g., 192.168.1.1).<br><br>All of the IPv4 address can be converted to binary format: <br></p>
@@ -304,6 +304,39 @@ And the host portion is last ".1". (i.e., the last 8 bits of IPv4 binary address
       </categories>
       <tags>
         <tag>Syntax</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Serve static content</title>
+    <url>/2022/01/29/Serve-static-content/</url>
+    <content><![CDATA[<p>Usually we put all the public content into <code>public</code> folder, including css, images etc. We should tell NodeJS to find the static folder.</p>
+<span id="more"></span>
+
+<h1 id="Get-root-path-of-our-project-folder"><a href="#Get-root-path-of-our-project-folder" class="headerlink" title="Get root path of our project folder"></a>Get root path of our project folder</h1><p>We need a module called <code>path</code> </p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">const path = require(&#x27;path&#x27;);</span><br><span class="line">module<span class="selector-class">.exports</span> = path<span class="selector-class">.dirname</span>(require<span class="selector-class">.main</span><span class="selector-class">.filename</span>);</span><br></pre></td></tr></table></figure>
+
+<p>Then we can use this module for our root directory.</p>
+<h1 id="Get-static-resources"><a href="#Get-static-resources" class="headerlink" title="Get static resources"></a>Get static resources</h1><p>For example, if we have file structure like this:</p>
+<p><img src="/images/Serve-static-content-1.png" alt="Example file structure"></p>
+<p> <code>shop.html</code> that contains a link to css file <code>&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/main.css&quot;&gt;</code> and the css file is in public folder, we can’t access the css file by simply put public in front of the link like <code>/public/css/main.css</code> . </p>
+<p>We should use express.static to tell NodeJS which folder is the static resource folder, then when the server sends file, it knows where to fetch the content. </p>
+<p>In app.js, we need:</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">app.use(express.static(path.join(__dirname, <span class="string">&#x27;public&#x27;</span>)));</span><br></pre></td></tr></table></figure>
+
+<p>When we call a module: </p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">app.use(shopRoutes);</span><br></pre></td></tr></table></figure>
+
+<p>And the module sends a html page:</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">router.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  res.sendFile(path.join(rootDir, <span class="string">&#x27;views&#x27;</span>, <span class="string">&#x27;shop.html&#x27;</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>This html page then can use the content of static folder</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/<span class="selector-tag">main</span><span class="selector-class">.css</span>&quot;&gt;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>NodeJS</tag>
+        <tag>Server</tag>
       </tags>
   </entry>
 </search>

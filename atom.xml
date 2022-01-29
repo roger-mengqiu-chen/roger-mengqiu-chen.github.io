@@ -3,11 +3,11 @@
   <title>Mengqiu Chen</title>
   
   <subtitle>Blog of a human developer</subtitle>
-  <link href="https://mengqiu.net/atom.xml" rel="self"/>
+  <link href="https://mengqiu.me/atom.xml" rel="self"/>
   
-  <link href="https://mengqiu.net/"/>
-  <updated>2022-01-29T05:53:16.890Z</updated>
-  <id>https://mengqiu.net/</id>
+  <link href="https://mengqiu.me/"/>
+  <updated>2022-01-29T23:49:23.513Z</updated>
+  <id>https://mengqiu.me/</id>
   
   <author>
     <name>Roger Chen</name>
@@ -17,13 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Project: IPv4 auto subnetting API</title>
-    <link href="https://mengqiu.net/2022/01/28/Project-IPv4-auto-subnetting-API/"/>
-    <id>https://mengqiu.net/2022/01/28/Project-IPv4-auto-subnetting-API/</id>
-    <published>2022-01-28T17:18:04.000Z</published>
-    <updated>2022-01-29T05:53:16.890Z</updated>
+    <title>Serve static content</title>
+    <link href="https://mengqiu.me/2022/01/29/Serve-static-content/"/>
+    <id>https://mengqiu.me/2022/01/29/Serve-static-content/</id>
+    <published>2022-01-29T23:42:37.000Z</published>
+    <updated>2022-01-29T23:49:23.513Z</updated>
     
-    <content type="html"><![CDATA[<p>This is a review of my IPv4 knowledge that learnt two years ago. And This project will replace the old java command line program.<br>You should be able to see the source code here: <a href="https://github.com/roger-mengqiu-chen/ipv4subnetting">https://github.com/roger-mengqiu-chen/ipv4subnetting</a>.</p><p>You can try this web app here: <a href="https://ipv4-subnetting.herokuapp.com/">https://ipv4-subnetting.herokuapp.com/</a></p><span id="more"></span><h1 id="Using-this-API"><a href="#Using-this-API" class="headerlink" title="Using this API"></a>Using this API</h1><p>The API will handle IPv4 subnetting automatically. It also handles the invalid user input. If the amount of required subnet address is too large, API will return <code>&#39;Not enough address !&#39;</code>.</p><p>To send request to this API, you need follow the format as below:</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;hostIp&quot;</span>:<span class="string">&quot;210.100.56.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;mask&quot;</span>:<span class="string">&quot;255.255.255.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;subnets&quot;</span>:&#123;</span><br><span class="line">        <span class="attr">&quot;net1&quot;</span>:<span class="number">2133</span>,</span><br><span class="line">        <span class="attr">&quot;net2&quot;</span>:<span class="number">4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>Within “subnets”, you need to mention the name of your subnet and the required amount of hosts within this subnet.<br>If the parent network has enough address, it will reponse with JSON with following format:</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;net2&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;ipAddress&quot;</span>: [</span><br><span class="line">            <span class="number">210</span>,</span><br><span class="line">            <span class="number">100</span>,</span><br><span class="line">            <span class="number">56</span>,</span><br><span class="line">            <span class="number">32</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;numberOfHosts&quot;</span>: <span class="number">4</span>,</span><br><span class="line">        <span class="attr">&quot;prefix&quot;</span>: <span class="number">29</span>,</span><br><span class="line">        <span class="attr">&quot;mask&quot;</span>: [</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">248</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;allocatedAddresses&quot;</span>: <span class="number">8</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;net1&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;ipAddress&quot;</span>: [</span><br><span class="line">            <span class="number">210</span>,</span><br><span class="line">            <span class="number">100</span>,</span><br><span class="line">            <span class="number">56</span>,</span><br><span class="line">            <span class="number">0</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;numberOfHosts&quot;</span>: <span class="number">21</span>,</span><br><span class="line">        <span class="attr">&quot;prefix&quot;</span>: <span class="number">27</span>,</span><br><span class="line">        <span class="attr">&quot;mask&quot;</span>: [</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">224</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;allocatedAddresses&quot;</span>: <span class="number">32</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure><h1 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h1><h2 id="IPv4-network"><a href="#IPv4-network" class="headerlink" title="IPv4 network"></a><strong>IPv4 network</strong></h2><p>IPv4 is 32 bit long IP address. We can divide the address into 4 sections, each of which is 8 bit long. In human-readable format, we separate these sections with “.” (e.g., 192.168.1.1).<br><br>All of the IPv4 address can be converted to binary format: <br></p><p>For example, 192.168.1.1  can be written in 11000000.10101000.00000001.00000001<br></p><table>    <th>Decimal </th><th> Binary </th>    <tr><td>192 </td><td>1100 0000 </td></tr>    <tr><td>168 </td><td>1010 0000 </td></tr>    <tr><td>1   </td><td>0000 0001 </td></tr></table><h2 id="Prefix-and-subnet-mask"><a href="#Prefix-and-subnet-mask" class="headerlink" title="Prefix and subnet mask"></a><strong>Prefix and subnet mask</strong></h2><p>Prefix is the number of “1”s in IPv4 binary format address from left to right. It is used to describe which part is the network address (The part with all “1”s is the network portion). <br><br>For example, 192.168.1.1 /24<br>Prefix /24 can be written in binary format:<br>11111111 11111111 11111111 00000000<br>The first 24 bits are all “1”s.<br>To convert it to human-readable format, we use subnet mask:<br>255.255.255.0 </p><table><th>Decimal</th><th>Binary</th><tr><td>255</td><td>11111111</td></tr></table><h2 id="Determine-the-network"><a href="#Determine-the-network" class="headerlink" title="Determine the network"></a><strong>Determine the network</strong></h2><p>IPv4 address has two portions: network portion and host portion. To determine the network portion, use logical AND for each bit: <br><br>For example: 192.168.1.1 /24 </p><table>    <th>Field</th><th> Value </th>    <tr><td>IPv4 host   </td><td> 11000000 10101000 00000001 00000001 </td></tr>    <tr><td>Subnet Mask </td><td> 11111111 11111111 11111111 00000000 </td></tr>    <tr><td>Logical AND </td><td> 11000000 10101000 00000001 00000000 </td></tr></table>The logical AND result is network address: 192.168.1.0 <br>And the host portion is last ".1". (i.e., the last 8 bits of IPv4 binary address)<br><h2 id="Assign-the-number-of-IP-addresses-according-to-the-number-of-hosts"><a href="#Assign-the-number-of-IP-addresses-according-to-the-number-of-hosts" class="headerlink" title="Assign the number of IP addresses according to the number of hosts"></a><strong>Assign the number of IP addresses according to the number of hosts</strong></h2><p>Each network has 2 reserved addresses: broadcast address and network address.</p><p>Broadcast address is the address with all “1”s in host portion (e.g., 192.168.1.0 /24 broadcast address is 192.168.1.255). </p><p>Network address is the address with all “0”s in host portion (e.g., 192.168.1.128 /25 network address is 192.168.1.128) </p><p>Each bit of the network address can hold 2 host addresses (0 and 1). When we allocate IP address for hosts, we caculate the required bits from right to left. </p><p>For example, if we want to take 6 addresses from 192.168.1.0 /24 network:</p><ul><li>Convert IP address to binary form: 11000000 10101000 00000001 00000000</li><li>6 ≈ 2^3, so 3 bits will be used</li><li>The rightmost 3 bits are the host part. The rest is network part</li><li>The prefix is 32 - 3 = 29. The mask is 11111111 11111111 11111111 11111000, which is 255.255.255.248 </li></ul><p>When we allocate addresses to hosts, remember to add broadcast and network address to the required number of hosts (i.e., 4 required hosts need at least 6 addresses).</p><h2 id="Divide-the-parent-network-according-to-the-required-number-of-host-addresses"><a href="#Divide-the-parent-network-according-to-the-required-number-of-host-addresses" class="headerlink" title="Divide the parent network according to the required number of host addresses"></a><strong>Divide the parent network according to the required number of host addresses</strong></h2><p>My strategy is sorting the subnets according to their size. Then allocate addresses from the biggest one.</p><p>For example, network address is 192.168.1.0 /24 and the table below is the required hosts for each network<br></p><table>    <th>network name</th><th>hosts</th>    <tr><td>network1</td><td>2</td></tr>    <tr><td>network2</td><td>20</td></tr>    <tr><td>network3</td><td>6</td></tr></table><p>Then we can allocate addresses as below: </p><table>    <th> network name </th><th> allocated addresses </th><th> prefix </th>    <tr><td>network2</td><td>32</td><td>27</td></tr>    <tr><td>network3</td><td>8</td><td>29</td></tr>    <tr><td>network1</td><td>4</td><td>30</td></tr></table><p>Finally, allocate network addresses from the biggest one </p><table>    <th>network name </th><th>network address</th>    <tr><td>network2</td><td>192.168.1.0 </td></tr>    <tr><td>network3</td><td>192.168.1.32 </td></tr>    <tr><td>network1</td><td>192.168.1.40 </td></tr></table>]]></content>
+    <content type="html"><![CDATA[<p>Usually we put all the public content into <code>public</code> folder, including css, images etc. We should tell NodeJS to find the static folder.</p><span id="more"></span><h1 id="Get-root-path-of-our-project-folder"><a href="#Get-root-path-of-our-project-folder" class="headerlink" title="Get root path of our project folder"></a>Get root path of our project folder</h1><p>We need a module called <code>path</code> </p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&#x27;path&#x27;);</span><br><span class="line">module<span class="selector-class">.exports</span> = path<span class="selector-class">.dirname</span>(require<span class="selector-class">.main</span><span class="selector-class">.filename</span>);</span><br></pre></td></tr></table></figure><p>Then we can use this module for our root directory.</p><h1 id="Get-static-resources"><a href="#Get-static-resources" class="headerlink" title="Get static resources"></a>Get static resources</h1><p>For example, if we have file structure like this:</p><p><img src="/images/Serve-static-content-1.png" alt="Example file structure"></p><p> <code>shop.html</code> that contains a link to css file <code>&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/main.css&quot;&gt;</code> and the css file is in public folder, we can’t access the css file by simply put public in front of the link like <code>/public/css/main.css</code> . </p><p>We should use express.static to tell NodeJS which folder is the static resource folder, then when the server sends file, it knows where to fetch the content. </p><p>In app.js, we need:</p><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(express.static(path.join(__dirname, <span class="string">&#x27;public&#x27;</span>)));</span><br></pre></td></tr></table></figure><p>When we call a module: </p><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(shopRoutes);</span><br></pre></td></tr></table></figure><p>And the module sends a html page:</p><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  res.sendFile(path.join(rootDir, <span class="string">&#x27;views&#x27;</span>, <span class="string">&#x27;shop.html&#x27;</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>This html page then can use the content of static folder</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/<span class="selector-tag">main</span><span class="selector-class">.css</span>&quot;&gt;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;Usually we put all the public content into &lt;code&gt;public&lt;/code&gt; folder, including css, images etc. We should tell NodeJS to find the static folder.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Javascript" scheme="https://mengqiu.me/categories/Javascript/"/>
+    
+    
+    <category term="NodeJS" scheme="https://mengqiu.me/tags/NodeJS/"/>
+    
+    <category term="Server" scheme="https://mengqiu.me/tags/Server/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Project: IPv4 auto subnetting API</title>
+    <link href="https://mengqiu.me/2022/01/28/Project-IPv4-auto-subnetting-API/"/>
+    <id>https://mengqiu.me/2022/01/28/Project-IPv4-auto-subnetting-API/</id>
+    <published>2022-01-28T17:18:04.000Z</published>
+    <updated>2022-01-29T22:00:51.688Z</updated>
+    
+    <content type="html"><![CDATA[<p>This is a review of my IPv4 knowledge that learnt two years ago. And This project will replace the old java command line program.<br>You should be able to see the source code here: <a href="https://github.com/roger-mengqiu-chen/ipv4subnetting">https://github.com/roger-mengqiu-chen/ipv4subnetting</a>.</p><p>You can try this web app here: <a href="https://ipv4-subnetting.herokuapp.com/">https://ipv4-subnetting.herokuapp.com/</a></p><span id="more"></span><h1 id="Using-this-API"><a href="#Using-this-API" class="headerlink" title="Using this API"></a>Using this API</h1><p>The API will handle IPv4 subnetting automatically. It also handles the invalid user input. If the amount of required subnet address is too large, API will return <code>&#39;Not enough address !&#39;</code>.</p><p>To send request to this API, you need follow the format as below:</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;hostIp&quot;</span>:<span class="string">&quot;210.100.56.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;mask&quot;</span>:<span class="string">&quot;255.255.255.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;subnets&quot;</span>:&#123;</span><br><span class="line">        <span class="attr">&quot;net1&quot;</span>:<span class="number">2133</span>,</span><br><span class="line">        <span class="attr">&quot;net2&quot;</span>:<span class="number">4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>Within “subnets”, you need to mention the name of your subnet and the required amount of hosts within this subnet.<br>If the parent network has enough address, it will repond with JSON with following format:</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;net2&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;ipAddress&quot;</span>: [</span><br><span class="line">            <span class="number">210</span>,</span><br><span class="line">            <span class="number">100</span>,</span><br><span class="line">            <span class="number">56</span>,</span><br><span class="line">            <span class="number">32</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;numberOfHosts&quot;</span>: <span class="number">4</span>,</span><br><span class="line">        <span class="attr">&quot;prefix&quot;</span>: <span class="number">29</span>,</span><br><span class="line">        <span class="attr">&quot;mask&quot;</span>: [</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">248</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;allocatedAddresses&quot;</span>: <span class="number">8</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;net1&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;ipAddress&quot;</span>: [</span><br><span class="line">            <span class="number">210</span>,</span><br><span class="line">            <span class="number">100</span>,</span><br><span class="line">            <span class="number">56</span>,</span><br><span class="line">            <span class="number">0</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;numberOfHosts&quot;</span>: <span class="number">21</span>,</span><br><span class="line">        <span class="attr">&quot;prefix&quot;</span>: <span class="number">27</span>,</span><br><span class="line">        <span class="attr">&quot;mask&quot;</span>: [</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">255</span>,</span><br><span class="line">            <span class="number">224</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">&quot;allocatedAddresses&quot;</span>: <span class="number">32</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure><h1 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h1><h2 id="IPv4-network"><a href="#IPv4-network" class="headerlink" title="IPv4 network"></a><strong>IPv4 network</strong></h2><p>IPv4 is 32 bit long IP address. We can divide the address into 4 sections, each of which is 8 bit long. In human-readable format, we separate these sections with “.” (e.g., 192.168.1.1).<br><br>All of the IPv4 address can be converted to binary format: <br></p><p>For example, 192.168.1.1  can be written in 11000000.10101000.00000001.00000001<br></p><table>    <th>Decimal </th><th> Binary </th>    <tr><td>192 </td><td>1100 0000 </td></tr>    <tr><td>168 </td><td>1010 0000 </td></tr>    <tr><td>1   </td><td>0000 0001 </td></tr></table><h2 id="Prefix-and-subnet-mask"><a href="#Prefix-and-subnet-mask" class="headerlink" title="Prefix and subnet mask"></a><strong>Prefix and subnet mask</strong></h2><p>Prefix is the number of “1”s in IPv4 binary format address from left to right. It is used to describe which part is the network address (The part with all “1”s is the network portion). <br><br>For example, 192.168.1.1 /24<br>Prefix /24 can be written in binary format:<br>11111111 11111111 11111111 00000000<br>The first 24 bits are all “1”s.<br>To convert it to human-readable format, we use subnet mask:<br>255.255.255.0 </p><table><th>Decimal</th><th>Binary</th><tr><td>255</td><td>11111111</td></tr></table><h2 id="Determine-the-network"><a href="#Determine-the-network" class="headerlink" title="Determine the network"></a><strong>Determine the network</strong></h2><p>IPv4 address has two portions: network portion and host portion. To determine the network portion, use logical AND for each bit: <br><br>For example: 192.168.1.1 /24 </p><table>    <th>Field</th><th> Value </th>    <tr><td>IPv4 host   </td><td> 11000000 10101000 00000001 00000001 </td></tr>    <tr><td>Subnet Mask </td><td> 11111111 11111111 11111111 00000000 </td></tr>    <tr><td>Logical AND </td><td> 11000000 10101000 00000001 00000000 </td></tr></table>The logical AND result is network address: 192.168.1.0 <br>And the host portion is last ".1". (i.e., the last 8 bits of IPv4 binary address)<br><h2 id="Assign-the-number-of-IP-addresses-according-to-the-number-of-hosts"><a href="#Assign-the-number-of-IP-addresses-according-to-the-number-of-hosts" class="headerlink" title="Assign the number of IP addresses according to the number of hosts"></a><strong>Assign the number of IP addresses according to the number of hosts</strong></h2><p>Each network has 2 reserved addresses: broadcast address and network address.</p><p>Broadcast address is the address with all “1”s in host portion (e.g., 192.168.1.0 /24 broadcast address is 192.168.1.255). </p><p>Network address is the address with all “0”s in host portion (e.g., 192.168.1.128 /25 network address is 192.168.1.128) </p><p>Each bit of the network address can hold 2 host addresses (0 and 1). When we allocate IP address for hosts, we caculate the required bits from right to left. </p><p>For example, if we want to take 6 addresses from 192.168.1.0 /24 network:</p><ul><li>Convert IP address to binary form: 11000000 10101000 00000001 00000000</li><li>6 ≈ 2^3, so 3 bits will be used</li><li>The rightmost 3 bits are the host part. The rest is network part</li><li>The prefix is 32 - 3 = 29. The mask is 11111111 11111111 11111111 11111000, which is 255.255.255.248 </li></ul><p>When we allocate addresses to hosts, remember to add broadcast and network address to the required number of hosts (i.e., 4 required hosts need at least 6 addresses).</p><h2 id="Divide-the-parent-network-according-to-the-required-number-of-host-addresses"><a href="#Divide-the-parent-network-according-to-the-required-number-of-host-addresses" class="headerlink" title="Divide the parent network according to the required number of host addresses"></a><strong>Divide the parent network according to the required number of host addresses</strong></h2><p>My strategy is sorting the subnets according to their size. Then allocate addresses from the biggest one.</p><p>For example, network address is 192.168.1.0 /24 and the table below is the required hosts for each network<br></p><table>    <th>network name</th><th>hosts</th>    <tr><td>network1</td><td>2</td></tr>    <tr><td>network2</td><td>20</td></tr>    <tr><td>network3</td><td>6</td></tr></table><p>Then we can allocate addresses as below: </p><table>    <th> network name </th><th> allocated addresses </th><th> prefix </th>    <tr><td>network2</td><td>32</td><td>27</td></tr>    <tr><td>network3</td><td>8</td><td>29</td></tr>    <tr><td>network1</td><td>4</td><td>30</td></tr></table><p>Finally, allocate network addresses from the biggest one </p><table>    <th>network name </th><th>network address</th>    <tr><td>network2</td><td>192.168.1.0 </td></tr>    <tr><td>network3</td><td>192.168.1.32 </td></tr>    <tr><td>network1</td><td>192.168.1.40 </td></tr></table>]]></content>
     
     
     <summary type="html">&lt;p&gt;This is a review of my IPv4 knowledge that learnt two years ago. And This project will replace the old java command line program.&lt;br&gt;You should be able to see the source code here: &lt;a href=&quot;https://github.com/roger-mengqiu-chen/ipv4subnetting&quot;&gt;https://github.com/roger-mengqiu-chen/ipv4subnetting&lt;/a&gt;.&lt;/p&gt;
@@ -31,21 +54,21 @@
     
     
     
-    <category term="Project" scheme="https://mengqiu.net/categories/Project/"/>
+    <category term="Project" scheme="https://mengqiu.me/categories/Project/"/>
     
     
-    <category term="IPv4" scheme="https://mengqiu.net/tags/IPv4/"/>
+    <category term="IPv4" scheme="https://mengqiu.me/tags/IPv4/"/>
     
-    <category term="REST" scheme="https://mengqiu.net/tags/REST/"/>
+    <category term="REST" scheme="https://mengqiu.me/tags/REST/"/>
     
-    <category term="API" scheme="https://mengqiu.net/tags/API/"/>
+    <category term="API" scheme="https://mengqiu.me/tags/API/"/>
     
   </entry>
   
   <entry>
     <title>Express basic routing</title>
-    <link href="https://mengqiu.net/2022/01/26/Express-basic-routing/"/>
-    <id>https://mengqiu.net/2022/01/26/Express-basic-routing/</id>
+    <link href="https://mengqiu.me/2022/01/26/Express-basic-routing/"/>
+    <id>https://mengqiu.me/2022/01/26/Express-basic-routing/</id>
     <published>2022-01-27T03:15:27.000Z</published>
     <updated>2022-01-28T04:16:16.915Z</updated>
     
@@ -56,21 +79,21 @@
     
     
     
-    <category term="Javascript" scheme="https://mengqiu.net/categories/Javascript/"/>
+    <category term="Javascript" scheme="https://mengqiu.me/categories/Javascript/"/>
     
     
-    <category term="NodeJS" scheme="https://mengqiu.net/tags/NodeJS/"/>
+    <category term="NodeJS" scheme="https://mengqiu.me/tags/NodeJS/"/>
     
-    <category term="Server" scheme="https://mengqiu.net/tags/Server/"/>
+    <category term="Server" scheme="https://mengqiu.me/tags/Server/"/>
     
-    <category term="Routing" scheme="https://mengqiu.net/tags/Routing/"/>
+    <category term="Routing" scheme="https://mengqiu.me/tags/Routing/"/>
     
   </entry>
   
   <entry>
     <title>Creating a server with NodeJS</title>
-    <link href="https://mengqiu.net/2022/01/25/Creating-a-server-with-NodeJS/"/>
-    <id>https://mengqiu.net/2022/01/25/Creating-a-server-with-NodeJS/</id>
+    <link href="https://mengqiu.me/2022/01/25/Creating-a-server-with-NodeJS/"/>
+    <id>https://mengqiu.me/2022/01/25/Creating-a-server-with-NodeJS/</id>
     <published>2022-01-26T02:21:29.000Z</published>
     <updated>2022-01-26T02:23:19.872Z</updated>
     
@@ -82,19 +105,19 @@
     
     
     
-    <category term="Javascript" scheme="https://mengqiu.net/categories/Javascript/"/>
+    <category term="Javascript" scheme="https://mengqiu.me/categories/Javascript/"/>
     
     
-    <category term="NodeJS" scheme="https://mengqiu.net/tags/NodeJS/"/>
+    <category term="NodeJS" scheme="https://mengqiu.me/tags/NodeJS/"/>
     
-    <category term="Server" scheme="https://mengqiu.net/tags/Server/"/>
+    <category term="Server" scheme="https://mengqiu.me/tags/Server/"/>
     
   </entry>
   
   <entry>
     <title>Callback vs Promise vs Async</title>
-    <link href="https://mengqiu.net/2022/01/25/Callback-vs-Promise-vs-Async/"/>
-    <id>https://mengqiu.net/2022/01/25/Callback-vs-Promise-vs-Async/</id>
+    <link href="https://mengqiu.me/2022/01/25/Callback-vs-Promise-vs-Async/"/>
+    <id>https://mengqiu.me/2022/01/25/Callback-vs-Promise-vs-Async/</id>
     <published>2022-01-25T19:28:34.000Z</published>
     <updated>2022-01-25T19:42:42.720Z</updated>
     
@@ -108,19 +131,19 @@
     
     
     
-    <category term="Javascript" scheme="https://mengqiu.net/categories/Javascript/"/>
+    <category term="Javascript" scheme="https://mengqiu.me/categories/Javascript/"/>
     
     
-    <category term="Syntax" scheme="https://mengqiu.net/tags/Syntax/"/>
+    <category term="Syntax" scheme="https://mengqiu.me/tags/Syntax/"/>
     
-    <category term="Async" scheme="https://mengqiu.net/tags/Async/"/>
+    <category term="Async" scheme="https://mengqiu.me/tags/Async/"/>
     
   </entry>
   
   <entry>
     <title>Desctructuring object</title>
-    <link href="https://mengqiu.net/2022/01/25/Desctructuring-object/"/>
-    <id>https://mengqiu.net/2022/01/25/Desctructuring-object/</id>
+    <link href="https://mengqiu.me/2022/01/25/Desctructuring-object/"/>
+    <id>https://mengqiu.me/2022/01/25/Desctructuring-object/</id>
     <published>2022-01-25T16:53:59.000Z</published>
     <updated>2022-01-25T16:55:10.777Z</updated>
     
@@ -131,17 +154,17 @@
     
     
     
-    <category term="Javascript" scheme="https://mengqiu.net/categories/Javascript/"/>
+    <category term="Javascript" scheme="https://mengqiu.me/categories/Javascript/"/>
     
     
-    <category term="Syntax" scheme="https://mengqiu.net/tags/Syntax/"/>
+    <category term="Syntax" scheme="https://mengqiu.me/tags/Syntax/"/>
     
   </entry>
   
   <entry>
     <title>Spread and rest operator</title>
-    <link href="https://mengqiu.net/2022/01/24/Spread-and-rest-operator/"/>
-    <id>https://mengqiu.net/2022/01/24/Spread-and-rest-operator/</id>
+    <link href="https://mengqiu.me/2022/01/24/Spread-and-rest-operator/"/>
+    <id>https://mengqiu.me/2022/01/24/Spread-and-rest-operator/</id>
     <published>2022-01-24T16:24:08.000Z</published>
     <updated>2022-01-24T16:28:19.516Z</updated>
     
@@ -152,17 +175,17 @@
     
     
     
-    <category term="Javascript" scheme="https://mengqiu.net/categories/Javascript/"/>
+    <category term="Javascript" scheme="https://mengqiu.me/categories/Javascript/"/>
     
     
-    <category term="Syntax" scheme="https://mengqiu.net/tags/Syntax/"/>
+    <category term="Syntax" scheme="https://mengqiu.me/tags/Syntax/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript function</title>
-    <link href="https://mengqiu.net/2022/01/24/JavaScript-function/"/>
-    <id>https://mengqiu.net/2022/01/24/JavaScript-function/</id>
+    <link href="https://mengqiu.me/2022/01/24/JavaScript-function/"/>
+    <id>https://mengqiu.me/2022/01/24/JavaScript-function/</id>
     <published>2022-01-24T07:07:25.000Z</published>
     <updated>2022-01-24T16:23:40.365Z</updated>
     
@@ -176,10 +199,10 @@
     
     
     
-    <category term="Javascript" scheme="https://mengqiu.net/categories/Javascript/"/>
+    <category term="Javascript" scheme="https://mengqiu.me/categories/Javascript/"/>
     
     
-    <category term="Syntax" scheme="https://mengqiu.net/tags/Syntax/"/>
+    <category term="Syntax" scheme="https://mengqiu.me/tags/Syntax/"/>
     
   </entry>
   
