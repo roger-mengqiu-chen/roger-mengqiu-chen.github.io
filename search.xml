@@ -198,30 +198,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Spread and rest operator</title>
-    <url>/2022/01/24/Spread-and-rest-operator/</url>
-    <content><![CDATA[<p>Spread operator <code>...</code> is used to unpack or “spread out” the elements of an array (or any other iterable object, such as string) in a context where individual values are expected.<br>Rest operator <code>...</code> is used to pack arguments of a function. </p>
-<span id="more"></span>
-
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&quot;4213&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">4</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.min(...s)); <span class="comment">// print 1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.min(...arr)); <span class="comment">// print 1</span></span><br></pre></td></tr></table></figure>
-
-<p>Rest operator <code>...</code> is used to write functions that can be invoked with arbitrarily more arguments than parameters. </p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">max</span>(<span class="params">first=-<span class="literal">Infinity</span>, ...rest</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> maxValue = first; <span class="comment">// Start by assuming the first arg is biggest</span></span><br><span class="line">    <span class="comment">// Then loop through the rest of the arguments, looking for bigger</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> n <span class="keyword">of</span> rest) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &gt; maxValue) &#123;</span><br><span class="line">            maxValue = n;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Return the biggest</span></span><br><span class="line">    <span class="keyword">return</span> maxValue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">max(<span class="number">1</span>, <span class="number">10</span>, <span class="number">100</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1000</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)  <span class="comment">// =&gt; 1000</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>The spread operator for function call</strong></p>
-<p>When we use <code>...</code> in function definition, it has the opposite effect to the spread operator. </p>
-<p>Using <code>...</code> in a function definition gathers multiple function arguments into an array. Rest parameters and the spread operator are often useful together</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (args);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>); <span class="comment">// print &quot;[1,2,3,4]&quot;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params">innerf</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...arg</span>) </span>&#123; <span class="comment">// ...arg is the arguments passed to f(innerf)</span></span><br><span class="line">        <span class="keyword">return</span> innerf(...arg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">innerf</span>(<span class="params">...x</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(...x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f(innerf)(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>); <span class="comment">// print &quot;1 2 3 4&quot;</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>Syntax</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Project: IPv4 auto subnetting API</title>
     <url>/2022/01/28/Project-IPv4-auto-subnetting-API/</url>
     <content><![CDATA[<p>This is a review of my IPv4 knowledge that learnt two years ago. And This project will replace the old java command line program.<br>You should be able to see the source code here: <a href="https://github.com/roger-mengqiu-chen/ipv4subnetting">https://github.com/roger-mengqiu-chen/ipv4subnetting</a>.</p>
@@ -304,6 +280,30 @@ And the host portion is last ".1". (i.e., the last 8 bits of IPv4 binary address
         <tag>IPv4</tag>
         <tag>REST</tag>
         <tag>API</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spread and rest operator</title>
+    <url>/2022/01/24/Spread-and-rest-operator/</url>
+    <content><![CDATA[<p>Spread operator <code>...</code> is used to unpack or “spread out” the elements of an array (or any other iterable object, such as string) in a context where individual values are expected.<br>Rest operator <code>...</code> is used to pack arguments of a function. </p>
+<span id="more"></span>
+
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&quot;4213&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">4</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.min(...s)); <span class="comment">// print 1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.min(...arr)); <span class="comment">// print 1</span></span><br></pre></td></tr></table></figure>
+
+<p>Rest operator <code>...</code> is used to write functions that can be invoked with arbitrarily more arguments than parameters. </p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">max</span>(<span class="params">first=-<span class="literal">Infinity</span>, ...rest</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> maxValue = first; <span class="comment">// Start by assuming the first arg is biggest</span></span><br><span class="line">    <span class="comment">// Then loop through the rest of the arguments, looking for bigger</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> n <span class="keyword">of</span> rest) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &gt; maxValue) &#123;</span><br><span class="line">            maxValue = n;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Return the biggest</span></span><br><span class="line">    <span class="keyword">return</span> maxValue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">max(<span class="number">1</span>, <span class="number">10</span>, <span class="number">100</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1000</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)  <span class="comment">// =&gt; 1000</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>The spread operator for function call</strong></p>
+<p>When we use <code>...</code> in function definition, it has the opposite effect to the spread operator. </p>
+<p>Using <code>...</code> in a function definition gathers multiple function arguments into an array. Rest parameters and the spread operator are often useful together</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (args);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>); <span class="comment">// print &quot;[1,2,3,4]&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params">innerf</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...arg</span>) </span>&#123; <span class="comment">// ...arg is the arguments passed to f(innerf)</span></span><br><span class="line">        <span class="keyword">return</span> innerf(...arg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">innerf</span>(<span class="params">...x</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(...x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f(innerf)(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>); <span class="comment">// print &quot;1 2 3 4&quot;</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>Syntax</tag>
       </tags>
   </entry>
 </search>
