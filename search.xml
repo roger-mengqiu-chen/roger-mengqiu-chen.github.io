@@ -274,6 +274,7 @@ And the host portion is last ".1". (i.e., the last 8 bits of IPv4 binary address
     <tr><td>network1</td><td>192.168.1.40 </td></tr>
 </table>]]></content>
       <categories>
+        <category>Java</category>
         <category>Project</category>
       </categories>
       <tags>
