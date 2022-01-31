@@ -6,7 +6,7 @@
   <link href="https://mengqiu.me/atom.xml" rel="self"/>
   
   <link href="https://mengqiu.me/"/>
-  <updated>2022-01-31T15:17:51.704Z</updated>
+  <updated>2022-01-31T16:38:28.777Z</updated>
   <id>https://mengqiu.me/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Call API from Facebook</title>
+    <link href="https://mengqiu.me/2022/01/31/Call-API-from-Facebook/"/>
+    <id>https://mengqiu.me/2022/01/31/Call-API-from-Facebook/</id>
+    <published>2022-01-31T16:37:46.000Z</published>
+    <updated>2022-01-31T16:38:28.777Z</updated>
+    
+    <content type="html"><![CDATA[<p>Simple walkthrough Facebook OAuth login and call API</p><span id="more"></span><h1 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h1><p>Create an app: Skipped. Go to Facebook developer </p><p>Besides, take note for app id and app secret</p><h1 id="Call-authorization-end-point"><a href="#Call-authorization-end-point" class="headerlink" title="Call authorization end point"></a>Call authorization end point</h1><p>Add a OAuth redirect URI. The URI should be encoded. Check: <a href="https://www.urlencoder.org/">https://www.urlencoder.org/</a></p><p>Use your browser visit:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.facebook.com/v12.0/dialog/oauth?client_id=&#123;app-id&#125;&amp;redirect_uri=&#123;redirect-uri&#125;&amp;state=1</span><br></pre></td></tr></table></figure><p>Replace <code>app-id</code> and <code>redirect-uri</code></p><p>The browser will be redirected to the url set by you with a code:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/?code=AQDf_x7kmu_Kq2GXPQ8ZH5xy5brC2V_n0TqNngEj8gNHlAY4qyph1aOGxpZIfiwasueJOHZ0P-FkdZGV5qHZCL1ILM58G1l9CYlJVltasRWSwC7vAH5aWp6tNPT8eFZfifzf8SSv6fp2G1dNfJHBkh6FUDCjro1hOFUz_I7zyFfK7TKQNUccle8Q_YrC9uASjoNMOEgJb4Rs4QHaEuUO3lI7kqJXjZqvBGnIKWOZoFqdIt4Q0DFNtgd8KEbQtoNLbq4FJbZAIBk99pMb6U-qeQ0RcF5tX0RgvUJAlISD7GhqRjwFfGKMiyaVQGZOFSpvHLCEOdOsYy3KggLl00Bk-YSXayKegZ4OYE9tR1vlkyN9W_C-LMmhgEMpwNOz-GEoscZ1C4m89znp3bzY0YcQCv4wiyF47Xz3E8ItsU1_tDglJd2wkZBvIWXquHuvbSIIZKY&amp;state=1#_=_</span><br></pre></td></tr></table></figure><h1 id="Token-endpoint"><a href="#Token-endpoint" class="headerlink" title="Token endpoint"></a>Token endpoint</h1><p>It’s GET instead of POST</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//graph.facebook.com/v12.0/oauth/access_token?redirect_uri=&#123;encoded-uri&#125;&amp;client_id=&#123;app-id&#125;&amp;client_secret=&#123;app-secret&#125;&amp;code=&#123;code&#125;</span></span><br></pre></td></tr></table></figure><p>replace <code>encoded-uri</code>, <code>app-id</code>, <code>app-secret</code>, <code>code</code>. </p><p>It will return with access_token:</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;access_token&quot;</span>: <span class="string">&quot;EAAI2o6ZAfRqgBANx3A6oymSKAz7rmuZCZAtEHudr1hvASwrInuvxitrAZC9QHqzkeiLLnynqvou1FmOabIaaMeamoOLfSTebsPKtTTKJEkW1SML1cjFKECth4bvMZAKMcsfhlUyCQ5TIj76ZBZBfbHNBeLTFTBfeZAxb8ZCO8n9zv1Kcg6EXpmeVq8SUnunStIhaTGIX4bZBQri4DHSbN5bcLnhqdCjyDIFJgBQGke7HjMNyyoZBgUlhs5HYq64Rg8h58MZD&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;token_type&quot;</span>: <span class="string">&quot;bearer&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;expires_in&quot;</span>: <span class="number">5182590</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="Call-API"><a href="#Call-API" class="headerlink" title="Call API"></a>Call API</h1><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -H <span class="string">&quot;Accept: application/json&quot;</span> -H <span class="string">&quot;Authorization: Bearer EAAI2o6ZAfRqgBANx3A6oymSKAz7rmuZCZAtEHudr1hvASwrInuvxitrAZC9QHqzkeiLLnynqvou1FmOabIaaMeamoOLfSTebsPKtTTKJEkW1SML1cjFKECth4bvMZAKMcsfhlUyCQ5TIj76ZBZBfbHNBeLTFTBfeZAxb8ZCO8n9zv1Kcg6EXpmeVq8SUnunStIhaTGIX4bZBQri4DHSbN5bcLnhqdCjyDIFJgBQGke7HjMNyyoZBgUlhs5HYq64Rg8h58MZD&quot;</span> <span class="string">&quot;https://graph.facebook.com/me&quot;</span></span><br></pre></td></tr></table></figure><p>This api call will return name and user id.</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;Simple walkthrough Facebook OAuth login and call API&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="API" scheme="https://mengqiu.me/categories/API/"/>
+    
+    
+    <category term="API" scheme="https://mengqiu.me/tags/API/"/>
+    
+    <category term="OAuth" scheme="https://mengqiu.me/tags/OAuth/"/>
+    
+  </entry>
   
   <entry>
     <title>OAuth2 (Facebook) setup</title>
