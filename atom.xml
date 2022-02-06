@@ -131,11 +131,11 @@
     <category term="Project" scheme="https://mengqiu.me/categories/Project/"/>
     
     
+    <category term="API" scheme="https://mengqiu.me/tags/API/"/>
+    
     <category term="IPv4" scheme="https://mengqiu.me/tags/IPv4/"/>
     
     <category term="REST" scheme="https://mengqiu.me/tags/REST/"/>
-    
-    <category term="API" scheme="https://mengqiu.me/tags/API/"/>
     
   </entry>
   
@@ -158,9 +158,9 @@
     
     <category term="NodeJS" scheme="https://mengqiu.me/tags/NodeJS/"/>
     
-    <category term="Server" scheme="https://mengqiu.me/tags/Server/"/>
-    
     <category term="Routing" scheme="https://mengqiu.me/tags/Routing/"/>
+    
+    <category term="Server" scheme="https://mengqiu.me/tags/Server/"/>
     
   </entry>
   
