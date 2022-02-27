@@ -724,6 +724,8 @@ And the host portion is last ".1". (i.e., the last 8 bits of IPv4 binary address
     <title>MongoDB with Node.js</title>
     <url>/2022/02/27/MongoDB-with-Node-js/</url>
     <content><![CDATA[<p>MongoDB is a famous noSQL database which is fast. The data are stored in collections instead of tables inside the database. </p>
+<span id="more"></span>
+
 <h1 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h1><p>Install mongoDB in npm first:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install mongodb</span><br></pre></td></tr></table></figure>
 
