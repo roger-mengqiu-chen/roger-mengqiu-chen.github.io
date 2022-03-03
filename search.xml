@@ -807,4 +807,62 @@ And the host portion is last ".1". (i.e., the last 8 bits of IPv4 binary address
         <tag>Mongoose</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Authentication in Node.js</title>
+    <url>/2022/03/03/Authentication-in-Node-js/</url>
+    <content><![CDATA[<p>Authentication is important in web application. The typical way is using username and password. We also need more security features to protect users credentials</p>
+<span id="more"></span>
+
+<h1 id="Password-hashing"><a href="#Password-hashing" class="headerlink" title="Password hashing"></a>Password hashing</h1><p>Password should never be saved as plain text in database. We should hash or encrypt the passwords. To achieve this, we use <code>bcryptjs</code> </p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">npm install bcryptjs</span><br></pre></td></tr></table></figure>
+
+<p>To hash a password:</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">cosnt bcrypt = <span class="built_in">require</span>(<span class="string">&#x27;bcryptjs&#x27;</span>);</span><br><span class="line">bcrypt.hash(password, <span class="number">12</span>) <span class="comment">// 12 is the round of hashing. Higher is more secure but need more computing time. </span></span><br><span class="line">.then(<span class="function"><span class="params">hashedPassword</span> =&gt;</span> &#123;</span><br><span class="line">	user = <span class="keyword">new</span> User(&#123;</span><br><span class="line">		<span class="attr">email</span>: email,</span><br><span class="line">		<span class="attr">password</span>: hashedPassword</span><br><span class="line">	&#125;)</span><br><span class="line">	user.save();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="Protecting-route"><a href="#Protecting-route" class="headerlink" title="Protecting route"></a>Protecting route</h1><p>We need middleware to protect our routes so unauthorized access through path can be prevented. </p>
+<p>For example, we can create a middleware called is-auth:</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!req.session.isLoggedIn) &#123;</span><br><span class="line">    <span class="keyword">return</span> res.redirect(<span class="string">&#x27;/login&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  next();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>This middleware will check if the request has a session with <code>isLoggedIn</code>, if it doesn’t have, then redirect response to /login, else, go to next middleware.</p>
+<p>Then we can use this middleware in our routes:</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">router.get(<span class="string">&#x27;/add-product&#x27;</span>, isAuth, adminController.getAddProduct);</span><br></pre></td></tr></table></figure>
+
+<p>In this router, request reaches <code>/add-product</code> first, then the server check if it’s authenticated with isAuth middleware. If it is, then goes to <code>adminController.getAddProduct</code>. If it’s not, then it’s redirected to <code>/login</code> as mentioned above. </p>
+<h1 id="CSRF-token-to-protect-against-malicious-request"><a href="#CSRF-token-to-protect-against-malicious-request" class="headerlink" title="CSRF token to protect against malicious request"></a>CSRF token to protect against malicious request</h1><p>For CSRF, check: <a href="https://owasp.org/www-community/attacks/csrf">Cross Site Request Forgery (CSRF) | OWASP Foundation</a></p>
+<p>We need another package called <code>csurf</code> to generate CSRF token for client. So the client need this token to complete its request. The token is regenerated for each rendered page.  </p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">npm install csurf</span><br></pre></td></tr></table></figure>
+
+<p>To use this package:</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> csrf = <span class="built_in">require</span>(<span class="string">&#x27;csurf&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> csrfProtection = csrf();</span><br><span class="line">...<span class="comment">// middleware for session </span></span><br><span class="line">app.use(csrfProtection);</span><br></pre></td></tr></table></figure>
+
+<p>ATTENTION: middleware for csrf have to be after middleware for session. </p>
+<p>By using csurf, each non-get request will be checked if it has a token. </p>
+<p>When client get a page, it will get a csrf token through <code>req.csrfToken()</code> For example:</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="built_in">exports</span>.getIndex = <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  Product.find()</span><br><span class="line">    .then(<span class="function"><span class="params">products</span> =&gt;</span> &#123;</span><br><span class="line">      res.render(<span class="string">&#x27;shop/index&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">prods</span>: products,</span><br><span class="line">        <span class="attr">pageTitle</span>: <span class="string">&#x27;Shop&#x27;</span>,</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">        <span class="attr">isAuthenticated</span>: req.session.isLoggedIn,</span><br><span class="line">        <span class="attr">csrfToken</span>: req.csrfToken() <span class="comment">// assign csrfToken to variable called csrfToken</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>When client sends non-get request from the same page, it should contain a parameter “_csrf” with value of csrfToken. For example, if we have logout form on the page of index :</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/logout&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;_csrf&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&lt;%= csrfToken %&gt;&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>&gt;</span>Logout<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Add-user-feedback-for-sent-requests"><a href="#Add-user-feedback-for-sent-requests" class="headerlink" title="Add user feedback for sent requests"></a>Add user feedback for sent requests</h1><p>To send feedback to users for invalid input, we use <code>connect-flash</code> :</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">npm install connect-flash</span><br></pre></td></tr></table></figure>
+
+<p>Then add it as middleware:</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> flash = <span class="built_in">require</span>(<span class="string">&#x27;connect-flash&#x27;</span>);</span><br><span class="line">app.use(flash()); <span class="comment">// this has to be after session middleware</span></span><br></pre></td></tr></table></figure>
+
+<p>Now, we can use this middleware in all of our controllers. For example, in auth.js:</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">User.findOne(&#123; <span class="attr">email</span>: email &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">user</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!user) &#123;</span><br><span class="line">      req.flash(<span class="string">&#x27;error&#x27;</span>, <span class="string">&quot;Invalid email or password&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> res.redirect(<span class="string">&#x27;/login&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">	...</span><br><span class="line">	&#125;)...</span><br></pre></td></tr></table></figure>
+
+<p>This will assign value “<code>Invalid email or password</code>” with key “<code>error</code>”</p>
+<p>To fetch this value:</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line">req.flash(<span class="string">&#x27;error&#x27;</span>)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>Security</tag>
+        <tag>Node.js</tag>
+        <tag>Authentication</tag>
+      </tags>
+  </entry>
 </search>
