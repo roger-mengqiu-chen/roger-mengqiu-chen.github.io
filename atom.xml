@@ -6,7 +6,7 @@
   <link href="https://mengqiu.me/atom.xml" rel="self"/>
   
   <link href="https://mengqiu.me/"/>
-  <updated>2022-03-03T19:16:37.723Z</updated>
+  <updated>2022-03-04T18:12:33.492Z</updated>
   <id>https://mengqiu.me/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mail in Node.js</title>
+    <link href="https://mengqiu.me/2022/03/04/Mail-in-Node-js/"/>
+    <id>https://mengqiu.me/2022/03/04/Mail-in-Node-js/</id>
+    <published>2022-03-04T18:11:45.000Z</published>
+    <updated>2022-03-04T18:12:33.492Z</updated>
+    
+    <content type="html"><![CDATA[<p>Sending mail helps communicate with users of website. We can use nodemailer and SenderGrid in our project to send email. </p><span id="more"></span><h1 id="Install-nodemailer-and-SendGrid"><a href="#Install-nodemailer-and-SendGrid" class="headerlink" title="Install nodemailer and SendGrid"></a>Install nodemailer and SendGrid</h1><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install nodemailer nodemailer-sendgrid-transport</span><br></pre></td></tr></table></figure><p>We need register an account with SendGrid. Then generate an api key with full access. </p><h1 id="Add-middleware"><a href="#Add-middleware" class="headerlink" title="Add middleware"></a>Add middleware</h1><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> nodemailer = <span class="built_in">require</span>(<span class="string">&#x27;nodemailer&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> sendgridTransport = <span class="built_in">require</span>(<span class="string">&#x27;nodemailer-sendgrid-transport&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> transpoerter = nodemailer.createTransport(sendgridTransport(&#123;</span><br><span class="line">  <span class="attr">auth</span>: &#123;</span><br><span class="line">    <span class="attr">api_key</span>: <span class="string">&#x27;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&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure><p>To send email:</p><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">transpoerter.sendMail(&#123;</span><br><span class="line">        <span class="attr">to</span>: email,</span><br><span class="line">        <span class="attr">from</span>: <span class="string">&#x27;yanmiao1992@hotmail.com&#x27;</span>,</span><br><span class="line">        <span class="attr">subject</span>: <span class="string">&#x27;Signup succeeded&#x27;</span>,</span><br><span class="line">        <span class="attr">html</span>: <span class="string">&#x27;&lt;h1&gt;You successfully signed up!&lt;/h1&gt;&#x27;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>This will return a promise</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;Sending mail helps communicate with users of website. We can use nodemailer and SenderGrid in our project to send email. &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="JavaScript" scheme="https://mengqiu.me/categories/JavaScript/"/>
+    
+    
+    <category term="Node.js" scheme="https://mengqiu.me/tags/Node-js/"/>
+    
+    <category term="Email" scheme="https://mengqiu.me/tags/Email/"/>
+    
+  </entry>
   
   <entry>
     <title>Authentication in Node.js</title>
