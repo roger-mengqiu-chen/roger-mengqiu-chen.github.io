@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mengqiu.me","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="This post is for Blog post 2 of SAIT INTP362 class. Reading previous posts instead of this big chunk of post is recommended.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Authentication with MongoDB in Node.js">
+<meta property="og:url" content="https://mengqiu.me/2022/04/04/Authentication-with-MongoDB-in-Node-js/">
+<meta property="og:site_name" content="Mengqiu Chen">
+<meta property="og:description" content="This post is for Blog post 2 of SAIT INTP362 class. Reading previous posts instead of this big chunk of post is recommended.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-04T18:28:56.000Z">
+<meta property="article:modified_time" content="2022-04-05T03:14:25.120Z">
+<meta property="article:author" content="Roger Chen">
+<meta property="article:tag" content="Security">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="MongoDB">
+<meta property="article:tag" content="Authentication">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mengqiu.me/2022/04/04/Authentication-with-MongoDB-in-Node-js/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://mengqiu.me/2022/04/04/Authentication-with-MongoDB-in-Node-js/","path":"2022/04/04/Authentication-with-MongoDB-in-Node-js/","title":"Authentication with MongoDB in Node.js"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Authentication with MongoDB in Node.js | Mengqiu Chen</title>
+  
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WS51X455SM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WS51X455SM');
+</script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Mengqiu Chen" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mengqiu Chen</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Blog of a human developer</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MongoDB"><span class="nav-number">1.</span> <span class="nav-text">MongoDB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Setup"><span class="nav-number">1.1.</span> <span class="nav-text">Setup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-update-entry-in-DB"><span class="nav-number">1.2.</span> <span class="nav-text">Create&#x2F;update entry in DB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Get-Delete"><span class="nav-number">1.3.</span> <span class="nav-text">Get &#x2F; Delete</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mongoose"><span class="nav-number">2.</span> <span class="nav-text">Mongoose</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install"><span class="nav-number">2.1.</span> <span class="nav-text">Install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Connect"><span class="nav-number">2.2.</span> <span class="nav-text">Connect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-schema"><span class="nav-number">2.3.</span> <span class="nav-text">Create schema</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-embedded-document-in-a-schema"><span class="nav-number">2.3.1.</span> <span class="nav-text">Create embedded document in a schema</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Save-an-object"><span class="nav-number">2.4.</span> <span class="nav-text">Save an object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Get-object"><span class="nav-number">2.5.</span> <span class="nav-text">Get object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Edit-object"><span class="nav-number">2.6.</span> <span class="nav-text">Edit object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete-object"><span class="nav-number">2.7.</span> <span class="nav-text">Delete object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-a-method-for-Mongoose-entity"><span class="nav-number">2.8.</span> <span class="nav-text">Create a method for Mongoose entity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#To-access-document-content-of-embedded-document"><span class="nav-number">2.9.</span> <span class="nav-text">To access document content of embedded document</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Authentication-and-security"><span class="nav-number">3.</span> <span class="nav-text">Authentication and security</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Password-hashing"><span class="nav-number">3.1.</span> <span class="nav-text">Password hashing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Protecting-route"><span class="nav-number">3.2.</span> <span class="nav-text">Protecting route</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSRF-token-to-protect-against-malicious-request"><span class="nav-number">3.3.</span> <span class="nav-text">CSRF token to protect against malicious request</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-user-feedback-for-sent-requests"><span class="nav-number">3.4.</span> <span class="nav-text">Add user feedback for sent requests</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Roger Chen"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Roger Chen</p>
+  <div class="site-description" itemprop="description">Learning is not enough, you must apply</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/roger-mengqiu-chen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;roger-mengqiu-chen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/mengqiu-roger-chen-30833a96/" title="LinkedIn → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;mengqiu-roger-chen-30833a96&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin-in fa-fw"></i>LinkedIn</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://mengqiu.me/2022/04/04/Authentication-with-MongoDB-in-Node-js/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Roger Chen">
+      <meta itemprop="description" content="Learning is not enough, you must apply">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mengqiu Chen">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Authentication with MongoDB in Node.js
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-04-04 12:28:56 / Modified: 21:14:25" itemprop="dateCreated datePublished" datetime="2022-04-04T12:28:56-06:00">2022-04-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>This post is for Blog post 2 of SAIT INTP362 class. Reading previous posts instead of this big chunk of post is recommended. </p>
+<span id="more"></span>
+
+<h1 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h1><h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><p>Install mongoDB in npm first:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install mongodb</span><br></pre></td></tr></table></figure>
+
+<p>Create database.js to connect with the database, here is the connection to cloud database:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mongodb = <span class="built_in">require</span>(<span class="string">&#x27;mongodb&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> MongoClient = mongodb.MongoClient;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> _db;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mongoConnect = <span class="function">(<span class="params">callback</span>) =&gt;</span> &#123;</span><br><span class="line">  MongoClient.connect(<span class="string">&#x27;mongodb+srv://username:password@cluster0.f6tfr.mongodb.net/myFirstDatabase?retryWrites=true&amp;w=majority&#x27;</span>)</span><br><span class="line">.then(<span class="function"><span class="params">client</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;connected !&quot;</span>);</span><br><span class="line">  _db = client.db();</span><br><span class="line">  callback();</span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">  <span class="keyword">throw</span> err;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> getDb = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (_db) &#123;</span><br><span class="line">    <span class="keyword">return</span> _db;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">throw</span> <span class="string">&#x27;No database found&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">exports</span>.mongoConnect = mongoConnect;</span><br><span class="line"><span class="built_in">exports</span>.getDb = getDb;</span><br></pre></td></tr></table></figure>
+
+<p>The string within <code>connect()</code> comes from the configuration of mongoDB Cloud.</p>
+<p>Then use following code to connect with database:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mongoConnect(<span class="function">(<span class="params">client</span>)=&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(client);</span><br><span class="line">  app.listen(<span class="number">3000</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Create-update-entry-in-DB"><a href="#Create-update-entry-in-DB" class="headerlink" title="Create/update entry in DB"></a>Create/update entry in DB</h2><p>Let’s say we have an object called Product. Within the Product class, we need the function save() to insert/update this object into database. We can check if the product has an id, if it has an id, then do updating procedure. MongoDB has its own way to store primary key, we need <code>new mongodb.ObejctId(id)</code> to generate the product id.</p>
+<p>And here’s the class:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getDb = <span class="built_in">require</span>(<span class="string">&#x27;../util/database&#x27;</span>).getDb;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">title, price, description, imageUrl, id</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.title = title;</span><br><span class="line">    <span class="built_in">this</span>.price = price;</span><br><span class="line">    <span class="built_in">this</span>.description = description;</span><br><span class="line">    <span class="built_in">this</span>.imageUrl = imageUrl;</span><br><span class="line">    <span class="built_in">this</span>._id = id ? <span class="keyword">new</span> mongodb.ObjectId(id) : <span class="literal">null</span>; <span class="comment">// check if the product has an id, if it doesn&#x27;t have one, create a new one</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">save</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> db = getDb();</span><br><span class="line">    <span class="keyword">let</span> dbOp;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>._id) &#123;</span><br><span class="line">      dbOp = db.collection(<span class="string">&#x27;products&#x27;</span>).updateOne( &#123;<span class="attr">_id</span>: <span class="built_in">this</span>._id&#125;, &#123; <span class="attr">$set</span>: <span class="built_in">this</span> &#125; );</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      dbOp = db.collection(<span class="string">&#x27;products&#x27;</span>).insertOne(<span class="built_in">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dbOp;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = Product;</span><br></pre></td></tr></table></figure>
+
+<p>Then, we can create a new Product and save it as below:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> product = <span class="keyword">new</span> Product(title, price, description, imageUrl);</span><br><span class="line">  product.save()</span><br><span class="line">  .then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Created product&#x27;</span>);</span><br><span class="line">    res.redirect(<span class="string">&#x27;/admin/products&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Get-Delete"><a href="#Get-Delete" class="headerlink" title="Get / Delete"></a>Get / Delete</h2><p>To get all the entries in a table:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="function"><span class="title">fetchAll</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> db = getDb();</span><br><span class="line">    <span class="keyword">return</span> db.collection(<span class="string">&#x27;products&#x27;</span>)</span><br><span class="line">    .find()</span><br><span class="line">    .toArray()</span><br><span class="line">    .then(<span class="function"><span class="params">products</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(products);</span><br><span class="line">      <span class="keyword">return</span> products;</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>To get an entry by id, we should use <code>new mongodb.ObejctId(id)</code> to get the id in mongodb here: </p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="function"><span class="title">findById</span>(<span class="params">prodId</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> db = getDb();</span><br><span class="line">    <span class="keyword">return</span> db.collection(<span class="string">&#x27;products&#x27;</span>)</span><br><span class="line">    .find(&#123; <span class="attr">_id</span>: <span class="keyword">new</span> mongodb.ObjectId(prodId) &#125;)</span><br><span class="line">    .next()</span><br><span class="line">    .then(<span class="function"><span class="params">product</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(product);</span><br><span class="line">      <span class="keyword">return</span> product;</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.log(err));</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>In the above example: we used <code>find().next()</code> to get a product. <code>find()</code> will get a cursor to a list of products. Using <code>next()</code> moves the cursor to the first entry of this list. We can use <code>findOne(prodId)</code> alternatively to get a product</p>
+<p>To delete entry by id:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="function"><span class="title">deleteById</span>(<span class="params">prodId</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> db = getDb();</span><br><span class="line">    <span class="keyword">return</span> db.collection(<span class="string">&#x27;products&#x27;</span>).deleteOne(&#123; <span class="attr">_id</span>: <span class="keyword">new</span> mongodb.ObjectId(prodId) &#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;Deleted&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>To know more MongoDB query language:<br><a target="_blank" rel="noopener" href="https://www.notion.so/rogermchen/MongoDB-with-NodeJS-7393af4873c640ff8dfa8261a64fefc2#ddb94de10b5b4b0d896ddd74fcdc2cce">https://www.notion.so/rogermchen/MongoDB-with-NodeJS-7393af4873c640ff8dfa8261a64fefc2#ddb94de10b5b4b0d896ddd74fcdc2cce</a></p>
+<h1 id="Mongoose"><a href="#Mongoose" class="headerlink" title="Mongoose"></a>Mongoose</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install mongoose</span><br></pre></td></tr></table></figure>
+
+<h2 id="Connect"><a href="#Connect" class="headerlink" title="Connect"></a>Connect</h2><p>We don’t have to configure database.js utility as before. Mongoose will take care for us. </p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mongoose.connect(<span class="string">&#x27;mongodb+srv://username:password@cluster0.f6tfr.mongodb.net/myFirstDatabase?retryWrites=true&amp;w=majority&#x27;</span>)</span><br><span class="line">.then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">  app.listen(<span class="number">3333</span>);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Create-schema"><a href="#Create-schema" class="headerlink" title="Create schema"></a>Create schema</h2><p>Although mongoDB is schemaless, we still need some restrictions to keep data organized. </p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mongoose = <span class="built_in">require</span>(<span class="string">&#x27;mongoose&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Schema = mongoose.Schema;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> productSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">  <span class="attr">title</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="built_in">String</span>,</span><br><span class="line">    <span class="attr">required</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">price</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="built_in">Number</span>,</span><br><span class="line">    <span class="attr">required</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">description</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="built_in">String</span>,</span><br><span class="line">    <span class="attr">required</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">imageUrl</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="built_in">String</span>,</span><br><span class="line">    <span class="attr">required</span>: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">module</span>.exports = mongoose.model(<span class="string">&#x27;Product&#x27;</span>, productSchema);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Create-embedded-document-in-a-schema"><a href="#Create-embedded-document-in-a-schema" class="headerlink" title="Create embedded document in a schema"></a>Create embedded document in a schema</h3><p>If we have an embedded document within a schema (e.g., user has a cart with him)</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> userSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">  <span class="attr">name</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="built_in">String</span>,</span><br><span class="line">    <span class="attr">required</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">email</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="built_in">String</span>,</span><br><span class="line">    <span class="attr">required</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">cart</span>: &#123;</span><br><span class="line">    <span class="attr">items</span>: [&#123;</span><br><span class="line">      <span class="attr">productId</span>: &#123; <span class="attr">type</span>: Schema.Types.ObjectId &#125;, </span><br><span class="line">      <span class="attr">quantity</span>: &#123; <span class="attr">type</span>: <span class="built_in">Number</span>, <span class="attr">required</span>: <span class="literal">true</span> &#125; </span><br><span class="line">    &#125;]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Save-an-object"><a href="#Save-an-object" class="headerlink" title="Save an object"></a>Save an object</h2><p>Mongoose has embedded method called <code>save()</code></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> product = <span class="keyword">new</span> Product(&#123;</span><br><span class="line">    <span class="attr">title</span>: title, </span><br><span class="line">    <span class="attr">price</span>: price, </span><br><span class="line">    <span class="attr">description</span>: description, </span><br><span class="line">    <span class="attr">imageUrl</span>: imageUrl</span><br><span class="line">  &#125;);</span><br><span class="line">  product</span><br><span class="line">  .save()</span><br><span class="line">  .then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Created product&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Get-object"><a href="#Get-object" class="headerlink" title="Get object"></a>Get object</h2><p>Use <code>findById()</code> can get object by id</p>
+<h2 id="Edit-object"><a href="#Edit-object" class="headerlink" title="Edit object"></a>Edit object</h2><p>We can fetch an object with <code>findById()</code> first and edit this object. Then use <code>save()</code> to update this object.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Product.findById(prodId)</span><br><span class="line">  .then(<span class="function"><span class="params">product</span> =&gt;</span> &#123;</span><br><span class="line">    product.title = updatedTitle;</span><br><span class="line">    product.price = updatedPrice;</span><br><span class="line">    product.description = updatedDesc;</span><br><span class="line">    product.imageUrl = updatedImageUrl;</span><br><span class="line">    <span class="keyword">return</span> product.save();</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Delete-object"><a href="#Delete-object" class="headerlink" title="Delete object"></a>Delete object</h2><p>Use <code>findByIdAndDelete()</code> can get the object and delete it. </p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Product.findByIdAndDelete(prodId)</span><br><span class="line">    .then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;DESTROYED PRODUCT&#x27;</span>);</span><br><span class="line">      res.redirect(<span class="string">&#x27;/admin/products&#x27;</span>);</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Create-a-method-for-Mongoose-entity"><a href="#Create-a-method-for-Mongoose-entity" class="headerlink" title="Create a method for Mongoose entity"></a>Create a method for Mongoose entity</h2><p>To create a method, we need <code>methods</code> keyword: </p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userSchema.methods.addToCart = <span class="function"><span class="keyword">function</span>(<span class="params">product</span>)</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="To-access-document-content-of-embedded-document"><a href="#To-access-document-content-of-embedded-document" class="headerlink" title="To access document content of embedded document"></a>To access document content of embedded document</h2><p>If we want to access embedded document content, for example for object below:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> userSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">  <span class="attr">name</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="built_in">String</span>,</span><br><span class="line">    <span class="attr">required</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">email</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="built_in">String</span>,</span><br><span class="line">    <span class="attr">required</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">cart</span>: &#123;</span><br><span class="line">    <span class="attr">items</span>: [&#123;</span><br><span class="line">      <span class="attr">product</span>: &#123; <span class="attr">type</span>: Schema.Types.ObjectId, <span class="attr">ref</span>: <span class="string">&#x27;Product&#x27;</span>, <span class="attr">required</span>: <span class="literal">true</span> &#125;, </span><br><span class="line">      <span class="attr">quantity</span>: &#123; <span class="attr">type</span>: <span class="built_in">Number</span>, <span class="attr">required</span>: <span class="literal">true</span> &#125; </span><br><span class="line">    &#125;]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>If we want to access product details within <code>cart.items</code> , we should use <code>._doc</code> .</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> products = user.cart.items.map(<span class="function"><span class="params">i</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">quantity</span>: i.quantity, <span class="attr">product</span>: &#123; ...i.product._doc &#125; &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="Authentication-and-security"><a href="#Authentication-and-security" class="headerlink" title="Authentication and security"></a>Authentication and security</h1><h2 id="Password-hashing"><a href="#Password-hashing" class="headerlink" title="Password hashing"></a>Password hashing</h2><p>Password should never be saved as plain text in database. We should hash or encrypt the passwords. To achieve this, we use <code>bcryptjs</code> </p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install bcryptjs</span><br></pre></td></tr></table></figure>
+
+<p>To hash a password:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cosnt bcrypt = <span class="built_in">require</span>(<span class="string">&#x27;bcryptjs&#x27;</span>);</span><br><span class="line">bcrypt.hash(password, <span class="number">12</span>) <span class="comment">// 12 is the round of hashing. Higher is more secure but need more computing time. </span></span><br><span class="line">.then(<span class="function"><span class="params">hashedPassword</span> =&gt;</span> &#123;</span><br><span class="line">	user = <span class="keyword">new</span> User(&#123;</span><br><span class="line">		<span class="attr">email</span>: email,</span><br><span class="line">		<span class="attr">password</span>: hashedPassword</span><br><span class="line">	&#125;)</span><br><span class="line">	user.save();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Protecting-route"><a href="#Protecting-route" class="headerlink" title="Protecting route"></a>Protecting route</h2><p>We need middleware to protect our routes so unauthorized access through path can be prevented. </p>
+<p>For example, we can create a middleware called is-auth:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!req.session.isLoggedIn) &#123;</span><br><span class="line">    <span class="keyword">return</span> res.redirect(<span class="string">&#x27;/login&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  next();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>This middleware will check if the request has a session with <code>isLoggedIn</code>, if it doesn’t have, then redirect response to /login, else, go to next middleware.</p>
+<p>Then we can use this middleware in our routes:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">&#x27;/add-product&#x27;</span>, isAuth, adminController.getAddProduct);</span><br></pre></td></tr></table></figure>
+
+<p>In this router, request reaches <code>/add-product</code> first, then the server check if it’s authenticated with isAuth middleware. If it is, then goes to <code>adminController.getAddProduct</code>. If it’s not, then it’s redirected to <code>/login</code> as mentioned above. </p>
+<h2 id="CSRF-token-to-protect-against-malicious-request"><a href="#CSRF-token-to-protect-against-malicious-request" class="headerlink" title="CSRF token to protect against malicious request"></a>CSRF token to protect against malicious request</h2><p>For CSRF, check: <a target="_blank" rel="noopener" href="https://owasp.org/www-community/attacks/csrf">Cross Site Request Forgery (CSRF) | OWASP Foundation</a></p>
+<p>We need another package called <code>csurf</code> to generate CSRF token for client. So the client need this token to complete its request. The token is regenerated for each rendered page.  </p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install csurf</span><br></pre></td></tr></table></figure>
+
+<p>To use this package:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> csrf = <span class="built_in">require</span>(<span class="string">&#x27;csurf&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> csrfProtection = csrf();</span><br><span class="line">...<span class="comment">// middleware for session </span></span><br><span class="line">app.use(csrfProtection);</span><br></pre></td></tr></table></figure>
+
+<p>ATTENTION: middleware for csrf have to be after middleware for session. </p>
+<p>By using csurf, each non-get request will be checked if it has a token. </p>
+<p>When client get a page, it will get a csrf token through <code>req.csrfToken()</code> For example:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exports</span>.getIndex = <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  Product.find()</span><br><span class="line">    .then(<span class="function"><span class="params">products</span> =&gt;</span> &#123;</span><br><span class="line">      res.render(<span class="string">&#x27;shop/index&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">prods</span>: products,</span><br><span class="line">        <span class="attr">pageTitle</span>: <span class="string">&#x27;Shop&#x27;</span>,</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">        <span class="attr">isAuthenticated</span>: req.session.isLoggedIn,</span><br><span class="line">        <span class="attr">csrfToken</span>: req.csrfToken() <span class="comment">// assign csrfToken to variable called csrfToken</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>When client sends non-get request from the same page, it should contain a parameter “_csrf” with value of csrfToken. For example, if we have logout form on the page of index :</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/logout&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;_csrf&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&lt;%= csrfToken %&gt;&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>&gt;</span>Logout<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Add-user-feedback-for-sent-requests"><a href="#Add-user-feedback-for-sent-requests" class="headerlink" title="Add user feedback for sent requests"></a>Add user feedback for sent requests</h2><p>To send feedback to users for invalid input, we use <code>connect-flash</code> :</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install connect-flash</span><br></pre></td></tr></table></figure>
+
+<p>Then add it as middleware:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> flash = <span class="built_in">require</span>(<span class="string">&#x27;connect-flash&#x27;</span>);</span><br><span class="line">app.use(flash()); <span class="comment">// this has to be after session middleware</span></span><br></pre></td></tr></table></figure>
+
+<p>Now, we can use this middleware in all of our controllers. For example, in auth.js:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">User.findOne(&#123; <span class="attr">email</span>: email &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">user</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!user) &#123;</span><br><span class="line">      req.flash(<span class="string">&#x27;error&#x27;</span>, <span class="string">&quot;Invalid email or password&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> res.redirect(<span class="string">&#x27;/login&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">	...</span><br><span class="line">	&#125;)...</span><br></pre></td></tr></table></figure>
+
+<p>This will assign value “<code>Invalid email or password</code>” with key “<code>error</code>”</p>
+<p>To fetch this value:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">req.flash(<span class="string">&#x27;error&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>The repository of mini project: <a target="_blank" rel="noopener" href="https://github.com/roger-mengqiu-chen/Node-Simple-Authentication">https://github.com/roger-mengqiu-chen/Node-Simple-Authentication</a></p>
+<p>Youtube:</p>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/F7JUVn5PNDc" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Security/" rel="tag"># Security</a>
+              <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+              <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
+              <a href="/tags/Authentication/" rel="tag"># Authentication</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/04/Mail-in-Node-js/" rel="prev" title="Mail in Node.js">
+                  <i class="fa fa-chevron-left"></i> Mail in Node.js
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fab fa-canadian-maple-leaf"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Roger Chen</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
