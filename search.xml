@@ -1013,7 +1013,10 @@ And the host portion is last ".1". (i.e., the last 8 bits of IPv4 binary address
   <entry>
     <title>Some configurations of TypeScript project in VSCode</title>
     <url>/2022/04/12/Some-configurations-of-TypeScript-project-in-VSCode/</url>
-    <content><![CDATA[<h1 id="Install-typescript-globally"><a href="#Install-typescript-globally" class="headerlink" title="Install typescript globally:"></a>Install typescript globally:</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install typescript -g</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<p>This post is about some configurations for TypeScript project in VSCode</p>
+<span id="more"></span>
+
+<h1 id="Install-typescript-globally"><a href="#Install-typescript-globally" class="headerlink" title="Install typescript globally:"></a>Install typescript globally:</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install typescript -g</span><br></pre></td></tr></table></figure>
 
 <h1 id="init-TypeScript-config"><a href="#init-TypeScript-config" class="headerlink" title="init TypeScript config:"></a>init TypeScript config:</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run compile -- --init</span><br></pre></td></tr></table></figure>
 

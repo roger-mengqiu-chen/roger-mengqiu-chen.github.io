@@ -251,9 +251,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-04-12 09:14:03 / Modified: 09:16:13" itemprop="dateCreated datePublished" datetime="2022-04-12T09:14:03-06:00">2022-04-12</time>
+      <time title="Created: 2022-04-12 09:14:03" itemprop="dateCreated datePublished" datetime="2022-04-12T09:14:03-06:00">2022-04-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-04-13 19:23:57" itemprop="dateModified" datetime="2022-04-13T19:23:57-06:00">2022-04-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -275,19 +281,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Install-typescript-globally"><a href="#Install-typescript-globally" class="headerlink" title="Install typescript globally:"></a>Install typescript globally:</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install typescript -g</span><br></pre></td></tr></table></figure>
-
-<h1 id="init-TypeScript-config"><a href="#init-TypeScript-config" class="headerlink" title="init TypeScript config:"></a>init TypeScript config:</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run compile -- --init</span><br></pre></td></tr></table></figure>
-
-<h1 id="watch-application-package-for-changes-Add-new-line-to-scripts-of-package-json-file"><a href="#watch-application-package-for-changes-Add-new-line-to-scripts-of-package-json-file" class="headerlink" title="watch application package for changes. Add new line to scripts of package.json file"></a>watch application package for changes. Add new line to scripts of package.json file</h1><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>:&#123;</span><br><span class="line">	<span class="attr">&quot;tsc&quot;</span>:<span class="string">&quot;tsc&quot;</span>,</span><br><span class="line">	<span class="attr">&quot;watch&quot;</span>:<span class="string">&quot;tsc --watch&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="reload-browser-for-changes"><a href="#reload-browser-for-changes" class="headerlink" title="reload browser for changes:"></a>reload browser for changes:</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install browser-sync--save-dev</span><br></pre></td></tr></table></figure>
-
-<h1 id="Add-script"><a href="#Add-script" class="headerlink" title="Add script:"></a>Add script:</h1><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;serve&quot;</span>:<span class="string">&quot;browser-sync start --server --watch&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>Debugger configurations: launch application in chrome through port 3000</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;configurations&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;chrome&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Launch against localhost&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;http://localhost:3000&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;webRoot&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
-
+          <p>This post is about some configurations for TypeScript project in VSCode</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/04/12/Some-configurations-of-TypeScript-project-in-VSCode/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
