@@ -56,13 +56,13 @@
     <category term="JavaScript" scheme="https://mengqiu.me/categories/JavaScript/"/>
     
     
-    <category term="Security" scheme="https://mengqiu.me/tags/Security/"/>
-    
     <category term="Node.js" scheme="https://mengqiu.me/tags/Node-js/"/>
     
-    <category term="MongoDB" scheme="https://mengqiu.me/tags/MongoDB/"/>
-    
     <category term="Authentication" scheme="https://mengqiu.me/tags/Authentication/"/>
+    
+    <category term="Security" scheme="https://mengqiu.me/tags/Security/"/>
+    
+    <category term="MongoDB" scheme="https://mengqiu.me/tags/MongoDB/"/>
     
   </entry>
   
@@ -106,11 +106,11 @@
     <category term="JavaScript" scheme="https://mengqiu.me/categories/JavaScript/"/>
     
     
-    <category term="Security" scheme="https://mengqiu.me/tags/Security/"/>
-    
     <category term="Node.js" scheme="https://mengqiu.me/tags/Node-js/"/>
     
     <category term="Authentication" scheme="https://mengqiu.me/tags/Authentication/"/>
+    
+    <category term="Security" scheme="https://mengqiu.me/tags/Security/"/>
     
   </entry>
   
@@ -179,9 +179,9 @@
     <category term="JavaScript" scheme="https://mengqiu.me/categories/JavaScript/"/>
     
     
-    <category term="MVC" scheme="https://mengqiu.me/tags/MVC/"/>
-    
     <category term="Node.js" scheme="https://mengqiu.me/tags/Node-js/"/>
+    
+    <category term="MVC" scheme="https://mengqiu.me/tags/MVC/"/>
     
   </entry>
   
@@ -202,11 +202,11 @@
     <category term="JavaScript" scheme="https://mengqiu.me/categories/JavaScript/"/>
     
     
+    <category term="Node.js" scheme="https://mengqiu.me/tags/Node-js/"/>
+    
     <category term="Database" scheme="https://mengqiu.me/tags/Database/"/>
     
     <category term="Sequelize" scheme="https://mengqiu.me/tags/Sequelize/"/>
-    
-    <category term="Node.js" scheme="https://mengqiu.me/tags/Node-js/"/>
     
   </entry>
   
@@ -227,11 +227,11 @@
     <category term="JavaScript" scheme="https://mengqiu.me/categories/JavaScript/"/>
     
     
-    <category term="Routing" scheme="https://mengqiu.me/tags/Routing/"/>
+    <category term="Node.js" scheme="https://mengqiu.me/tags/Node-js/"/>
     
     <category term="MVC" scheme="https://mengqiu.me/tags/MVC/"/>
     
-    <category term="Node.js" scheme="https://mengqiu.me/tags/Node-js/"/>
+    <category term="Routing" scheme="https://mengqiu.me/tags/Routing/"/>
     
   </entry>
   
@@ -276,9 +276,9 @@
     <category term="Java" scheme="https://mengqiu.me/categories/Java/"/>
     
     
-    <category term="OAuth" scheme="https://mengqiu.me/tags/OAuth/"/>
-    
     <category term="Security" scheme="https://mengqiu.me/tags/Security/"/>
+    
+    <category term="OAuth" scheme="https://mengqiu.me/tags/OAuth/"/>
     
     <category term="Spring boot" scheme="https://mengqiu.me/tags/Spring-boot/"/>
     
@@ -301,9 +301,9 @@
     <category term="JavaScript" scheme="https://mengqiu.me/categories/JavaScript/"/>
     
     
-    <category term="Server" scheme="https://mengqiu.me/tags/Server/"/>
-    
     <category term="Node.js" scheme="https://mengqiu.me/tags/Node-js/"/>
+    
+    <category term="Server" scheme="https://mengqiu.me/tags/Server/"/>
     
   </entry>
   
@@ -350,11 +350,11 @@
     <category term="JavaScript" scheme="https://mengqiu.me/categories/JavaScript/"/>
     
     
-    <category term="Routing" scheme="https://mengqiu.me/tags/Routing/"/>
+    <category term="Node.js" scheme="https://mengqiu.me/tags/Node-js/"/>
     
     <category term="Server" scheme="https://mengqiu.me/tags/Server/"/>
     
-    <category term="Node.js" scheme="https://mengqiu.me/tags/Node-js/"/>
+    <category term="Routing" scheme="https://mengqiu.me/tags/Routing/"/>
     
   </entry>
   
@@ -376,9 +376,9 @@
     <category term="JavaScript" scheme="https://mengqiu.me/categories/JavaScript/"/>
     
     
-    <category term="Server" scheme="https://mengqiu.me/tags/Server/"/>
-    
     <category term="Node.js" scheme="https://mengqiu.me/tags/Node-js/"/>
+    
+    <category term="Server" scheme="https://mengqiu.me/tags/Server/"/>
     
   </entry>
   
