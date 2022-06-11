@@ -819,7 +819,11 @@ And the host portion is last ".1". (i.e., the last 8 bits of IPv4 binary address
   <entry>
     <title>Simple tasks web app</title>
     <url>/2022/06/10/Simple-tasks-web-app/</url>
-    <content><![CDATA[<p>This is a walk through about how I build a simple task management web application. The framework used here is React. I didn’t use any CSS framework. The application can add tasks and delete tasks. There should be more features coming to this app (e.g., user login, database of tasks etc.).<br>The finished app can be visited through: <a href="https://cr-tasks-app.herokuapp.com/">https://cr-tasks-app.herokuapp.com/</a></p>
+    <content><![CDATA[<img style="height: 250px;" src="https://user-images.githubusercontent.com/9221441/173171529-04616d65-c383-4480-a865-3cdd250e7d97.png"/>
+
+<p>This is a walk through about how I build a simple task management web application. The framework used here is React. I didn't use any CSS framework. The application can add tasks and delete tasks. There should be more features coming to this app (e.g., user login, database of tasks etc.).
+The finished app can be visited through: <a href="https://cr-tasks-app.herokuapp.com/">https://cr-tasks-app.herokuapp.com/</a></p>
+
 <span id="more"></span>
 
 <h1 id="Structure"><a href="#Structure" class="headerlink" title="Structure"></a>Structure</h1><p>The app should contain a form for user to input task one by one. It also contains a list to display all the tasks owned by this user.</p>
